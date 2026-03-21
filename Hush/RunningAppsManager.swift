@@ -1,6 +1,8 @@
 import SwiftUI
 import AppKit
 import Combine
+import Darwin
+import IOKit.ps
 
 fileprivate let blockedBundleIdentifiers: Set<String> = [
     "com.apple.loginwindow",
@@ -13,11 +15,36 @@ fileprivate let blockedBundleIdentifiers: Set<String> = [
     "com.apple.Siri"
 ]
 
+fileprivate func isOnBatteryBelow(percent threshold: Int) -> Bool {
+    guard let snapshot = IOPSCopyPowerSourcesInfo()?.takeRetainedValue(),
+          let sources = IOPSCopyPowerSourcesList(snapshot)?.takeRetainedValue() as? [CFTypeRef] else {
+        return false
+    }
+    for source in sources {
+        guard let info = IOPSGetPowerSourceDescription(snapshot, source)?.takeUnretainedValue() as? [String: Any] else {
+            continue
+        }
+        let state = info[kIOPSPowerSourceStateKey] as? String
+        if state == kIOPSBatteryPowerValue,
+           let current = info[kIOPSCurrentCapacityKey] as? Int,
+           let max = info[kIOPSMaxCapacityKey] as? Int, max > 0 {
+            let pct = Double(current) / Double(max) * 100.0
+            return pct <= Double(threshold)
+        }
+    }
+    return false
+}
+
 class RunningAppsManager: ObservableObject {
     @Published var runningApps: [NSRunningApplication: Date] = [:]
     @Published var toggleStatus: [String: Bool] = [:]
 
+    @AppStorage("minutesUntilClose") var minutesUntilClose: Int = 120
     @AppStorage("com.MagicQuit.toggleStatus") var toggleStatusData: Data = Data()
+    // 0 = aus
+    @AppStorage("batteryAwareThresholdPercent") var batteryAwareThresholdPercent: Int = 30
+
+    private var timer: Timer?
 
     init() {
         syncToggleStatus()
@@ -32,6 +59,28 @@ class RunningAppsManager: ObservableObject {
                   !self.isBlockedApp(app) else { return }
             self.runningApps[app] = Date()
         }
+
+        self.timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { [weak self] _ in
+            self?.tick()
+        }
+    }
+
+    private func tick() {
+        checkOpenApps()
+    }
+
+    private func effectiveThresholdSeconds() -> Int {
+        var seconds = minutesUntilClose * 60
+        if batteryAwareThresholdPercent > 0,
+           isOnBatteryBelow(percent: batteryAwareThresholdPercent) {
+            seconds = max(60, seconds / 2)
+        }
+        return seconds
+    }
+
+    @discardableResult
+    private func quit(_ app: NSRunningApplication) -> Bool {
+        return app.terminate()
     }
 
     private func syncToggleStatus() {
@@ -60,6 +109,29 @@ class RunningAppsManager: ObservableObject {
         let now = Date()
         for app in NSWorkspace.shared.runningApplications where !isBlockedApp(app) && runningApps[app] == nil {
             runningApps[app] = now
+        }
+    }
+
+    private func checkOpenApps() {
+        let workspace = NSWorkspace.shared
+        let liveApps = Set(workspace.runningApplications)
+        let now = Date()
+        let thresholdSeconds = Double(effectiveThresholdSeconds())
+
+        runningApps = runningApps.filter { liveApps.contains($0.key) && !isBlockedApp($0.key) }
+
+        if let activeApp = workspace.frontmostApplication, !isBlockedApp(activeApp) {
+            runningApps[activeApp] = now
+        }
+
+        addCurrentRunningApps()
+
+        for (app, startDate) in runningApps where now.timeIntervalSince(startDate) > thresholdSeconds {
+            guard app.isFinishedLaunching,
+                  toggleStatus[app.localizedName ?? ""] ?? false else { continue }
+            if quit(app) {
+                runningApps[app] = nil
+            }
         }
     }
 }
