@@ -41,6 +41,8 @@ class RunningAppsManager: ObservableObject {
 
     @AppStorage("minutesUntilClose") var minutesUntilClose: Int = 120
     @AppStorage("com.MagicQuit.toggleStatus") var toggleStatusData: Data = Data()
+    @AppStorage("autoCheckNewApps") var autoCheckNewApps: Bool = false
+    @AppStorage("quitOnDisplaySleep") var quitOnDisplaySleep: Bool = true
     // 0 = aus
     @AppStorage("batteryAwareThresholdPercent") var batteryAwareThresholdPercent: Int = 30
 
@@ -58,6 +60,13 @@ class RunningAppsManager: ObservableObject {
                   let app = notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication,
                   !self.isBlockedApp(app) else { return }
             self.runningApps[app] = Date()
+            self.applyAutoCheckIfNeeded(for: app)
+        }
+        // lid close / display sleep / menu Sleep
+        for name in [NSWorkspace.screensDidSleepNotification, NSWorkspace.willSleepNotification] {
+            workspaceCenter.addObserver(forName: name, object: nil, queue: .main) { [weak self] _ in
+                self?.handleDisplaysWillSleep()
+            }
         }
 
         self.timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { [weak self] _ in
@@ -76,6 +85,19 @@ class RunningAppsManager: ObservableObject {
             seconds = max(60, seconds / 2)
         }
         return seconds
+    }
+
+    private func handleDisplaysWillSleep() {
+        guard quitOnDisplaySleep else { return }
+        let frontmost = NSWorkspace.shared.frontmostApplication
+        for app in runningApps.keys {
+            guard !isBlockedApp(app),
+                  toggleStatus[app.localizedName ?? ""] ?? false,
+                  app.processIdentifier != frontmost?.processIdentifier else {
+                continue
+            }
+            quit(app)
+        }
     }
 
     @discardableResult
@@ -109,7 +131,16 @@ class RunningAppsManager: ObservableObject {
         let now = Date()
         for app in NSWorkspace.shared.runningApplications where !isBlockedApp(app) && runningApps[app] == nil {
             runningApps[app] = now
+            applyAutoCheckIfNeeded(for: app)
         }
+    }
+
+    private func applyAutoCheckIfNeeded(for app: NSRunningApplication) {
+        guard autoCheckNewApps,
+              let name = app.localizedName,
+              toggleStatus[name] == nil else { return }
+        toggleStatus[name] = true
+        saveToggleStatus()
     }
 
     private func checkOpenApps() {

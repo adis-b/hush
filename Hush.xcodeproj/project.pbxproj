@@ -11,6 +11,7 @@
 		2517732D2A4F80970047DDA5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2517732C2A4F80970047DDA5 /* ContentView.swift */; };
 		25C001B12B4F8097004700B4 /* RunningAppsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C001A12B4F8097004700A4 /* RunningAppsManager.swift */; };
 		25C001B12B4F8097004700B6 /* AppRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C001A12B4F8097004700A6 /* AppRow.swift */; };
+		25C001B12B4F8097004700B7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C001A12B4F8097004700A7 /* SettingsView.swift */; };
 		2517732F2A4F80980047DDA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2517732E2A4F80980047DDA5 /* Assets.xcassets */; };
 		251773322A4F80980047DDA5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 251773312A4F80980047DDA5 /* Preview Assets.xcassets */; };
 		2517733D2A4F80980047DDA5 /* HushTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2517733C2A4F80980047DDA5 /* HushTests.swift */; };
@@ -51,6 +52,7 @@
 		25A62DFB2A7B04D300C6FDAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25C001A12B4F8097004700A4 /* RunningAppsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningAppsManager.swift; sourceTree = "<group>"; };
 		25C001A12B4F8097004700A6 /* AppRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRow.swift; sourceTree = "<group>"; };
+		25C001A12B4F8097004700A7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				2517732C2A4F80970047DDA5 /* ContentView.swift */,
 				25C001A12B4F8097004700A4 /* RunningAppsManager.swift */,
 				25C001A12B4F8097004700A6 /* AppRow.swift */,
+				25C001A12B4F8097004700A7 /* SettingsView.swift */,
 				2517732E2A4F80980047DDA5 /* Assets.xcassets */,
 				251773332A4F80980047DDA5 /* Hush.entitlements */,
 				251773302A4F80980047DDA5 /* Preview Content */,
@@ -279,6 +282,7 @@
 				2517732B2A4F80970047DDA5 /* HushApp.swift in Sources */,
 				25C001B12B4F8097004700B4 /* RunningAppsManager.swift in Sources */,
 				25C001B12B4F8097004700B6 /* AppRow.swift in Sources */,
+				25C001B12B4F8097004700B7 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

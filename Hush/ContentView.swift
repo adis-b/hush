@@ -8,6 +8,7 @@ import AppKit
 
 struct ContentView: View {
     @ObservedObject var manager: RunningAppsManager
+    @State private var settingsWindowController: SettingsWindowController?
 
     private var selectAllBinding: Binding<Bool> {
         Binding<Bool>(
@@ -55,10 +56,21 @@ struct ContentView: View {
 
             Divider().padding(.vertical, 5)
 
-            Button("Quit Hush") { NSApplication.shared.terminate(nil) }
-                .buttonStyle(.plain)
+            Button("Settings", action: openSettings).buttonStyle(.plain)
+            Button("Quit Hush") { NSApplication.shared.terminate(nil) }.buttonStyle(.plain)
         }
         .padding(10)
         .frame(width: 314)
+    }
+
+    private func openSettings() {
+        if let existing = SettingsWindowController.current {
+            existing.window?.makeKeyAndOrderFront(nil)
+        } else {
+            let controller = SettingsWindowController(rootView: SettingsView(manager: manager))
+            settingsWindowController = controller
+            controller.showWindow(nil)
+        }
+        NSApp.activate(ignoringOtherApps: true)
     }
 }
