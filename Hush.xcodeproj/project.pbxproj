@@ -10,6 +10,7 @@
 		2517732B2A4F80970047DDA5 /* HushApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2517732A2A4F80970047DDA5 /* HushApp.swift */; };
 		2517732D2A4F80970047DDA5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2517732C2A4F80970047DDA5 /* ContentView.swift */; };
 		25C001B12B4F8097004700B4 /* RunningAppsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C001A12B4F8097004700A4 /* RunningAppsManager.swift */; };
+		25C001B12B4F8097004700B5 /* FocusSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C001A12B4F8097004700A5 /* FocusSessionView.swift */; };
 		25C001B12B4F8097004700B6 /* AppRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C001A12B4F8097004700A6 /* AppRow.swift */; };
 		25C001B12B4F8097004700B7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C001A12B4F8097004700A7 /* SettingsView.swift */; };
 		2517732F2A4F80980047DDA5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2517732E2A4F80980047DDA5 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		251773482A4F80980047DDA5 /* HushUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HushUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		25A62DFB2A7B04D300C6FDAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25C001A12B4F8097004700A4 /* RunningAppsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningAppsManager.swift; sourceTree = "<group>"; };
+		25C001A12B4F8097004700A5 /* FocusSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSessionView.swift; sourceTree = "<group>"; };
 		25C001A12B4F8097004700A6 /* AppRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRow.swift; sourceTree = "<group>"; };
 		25C001A12B4F8097004700A7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +110,7 @@
 				2517732A2A4F80970047DDA5 /* HushApp.swift */,
 				2517732C2A4F80970047DDA5 /* ContentView.swift */,
 				25C001A12B4F8097004700A4 /* RunningAppsManager.swift */,
+				25C001A12B4F8097004700A5 /* FocusSessionView.swift */,
 				25C001A12B4F8097004700A6 /* AppRow.swift */,
 				25C001A12B4F8097004700A7 /* SettingsView.swift */,
 				2517732E2A4F80980047DDA5 /* Assets.xcassets */,
@@ -281,6 +284,7 @@
 				2517732D2A4F80970047DDA5 /* ContentView.swift in Sources */,
 				2517732B2A4F80970047DDA5 /* HushApp.swift in Sources */,
 				25C001B12B4F8097004700B4 /* RunningAppsManager.swift in Sources */,
+				25C001B12B4F8097004700B5 /* FocusSessionView.swift in Sources */,
 				25C001B12B4F8097004700B6 /* AppRow.swift in Sources */,
 				25C001B12B4F8097004700B7 /* SettingsView.swift in Sources */,
 			);

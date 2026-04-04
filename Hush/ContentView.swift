@@ -36,6 +36,11 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            FocusSessionView(manager: manager)
+                .padding(.bottom, 5)
+
+            Divider().padding(.bottom, 5)
+
             HStack {
                 Toggle("", isOn: selectAllBinding)
                     .toggleStyle(CheckboxToggleStyle())

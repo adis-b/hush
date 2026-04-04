@@ -3,6 +3,7 @@ import AppKit
 import Combine
 import Darwin
 import IOKit.ps
+import UserNotifications
 
 fileprivate let blockedBundleIdentifiers: Set<String> = [
     "com.apple.loginwindow",
@@ -38,6 +39,7 @@ fileprivate func isOnBatteryBelow(percent threshold: Int) -> Bool {
 class RunningAppsManager: ObservableObject {
     @Published var runningApps: [NSRunningApplication: Date] = [:]
     @Published var toggleStatus: [String: Bool] = [:]
+    @Published var focusSessionEndDate: Date?
 
     @AppStorage("minutesUntilClose") var minutesUntilClose: Int = 120
     @AppStorage("com.MagicQuit.toggleStatus") var toggleStatusData: Data = Data()
@@ -45,7 +47,9 @@ class RunningAppsManager: ObservableObject {
     @AppStorage("quitOnDisplaySleep") var quitOnDisplaySleep: Bool = true
     // 0 = aus
     @AppStorage("batteryAwareThresholdPercent") var batteryAwareThresholdPercent: Int = 30
+    @AppStorage("lastFocusDuration") var lastFocusDuration: Int = 25
 
+    private let focusSessionGracePeriodSeconds = 30
     private var timer: Timer?
 
     init() {
@@ -62,23 +66,36 @@ class RunningAppsManager: ObservableObject {
             self.runningApps[app] = Date()
             self.applyAutoCheckIfNeeded(for: app)
         }
-        // lid close / display sleep / menu Sleep
         for name in [NSWorkspace.screensDidSleepNotification, NSWorkspace.willSleepNotification] {
             workspaceCenter.addObserver(forName: name, object: nil, queue: .main) { [weak self] _ in
                 self?.handleDisplaysWillSleep()
             }
         }
 
-        self.timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { [weak self] _ in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, _ in }
+
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.tick()
         }
     }
 
     private func tick() {
-        checkOpenApps()
+        let now = Date()
+        let popupOpen = NSApplication.shared.windows.contains { $0.isKeyWindow || $0.isMainWindow }
+        let atMinuteBoundary = floor(now.timeIntervalSince1970.truncatingRemainder(dividingBy: 60)) == 0
+
+        if popupOpen || atMinuteBoundary {
+            checkOpenApps()
+        }
+        if let end = focusSessionEndDate, now >= end {
+            endFocusSession(reason: .completed)
+        }
     }
 
     private func effectiveThresholdSeconds() -> Int {
+        if focusSessionEndDate != nil {
+            return focusSessionGracePeriodSeconds
+        }
         var seconds = minutesUntilClose * 60
         if batteryAwareThresholdPercent > 0,
            isOnBatteryBelow(percent: batteryAwareThresholdPercent) {
@@ -98,6 +115,49 @@ class RunningAppsManager: ObservableObject {
             }
             quit(app)
         }
+    }
+
+    enum FocusSessionEndReason {
+        case completed, cancelled
+    }
+
+    func startFocusSession(minutes: Int) {
+        lastFocusDuration = minutes
+        focusSessionEndDate = Date().addingTimeInterval(Double(minutes * 60))
+        // alles offene = fair game
+        let frontmost = NSWorkspace.shared.frontmostApplication
+        for app in runningApps.keys {
+            guard !isBlockedApp(app),
+                  toggleStatus[app.localizedName ?? ""] ?? false,
+                  app.processIdentifier != frontmost?.processIdentifier else {
+                continue
+            }
+            quit(app)
+        }
+    }
+
+    func cancelFocusSession() {
+        endFocusSession(reason: .cancelled)
+    }
+
+    func toggleFocusSession() {
+        if focusSessionEndDate != nil {
+            cancelFocusSession()
+        } else {
+            startFocusSession(minutes: lastFocusDuration)
+        }
+    }
+
+    private func endFocusSession(reason: FocusSessionEndReason) {
+        focusSessionEndDate = nil
+        guard reason == .completed else { return }
+        let content = UNMutableNotificationContent()
+        content.title = "Focus session complete"
+        content.body = "Your Mac is a little quieter."
+        let request = UNNotificationRequest(identifier: "hush.focus.complete",
+                                            content: content,
+                                            trigger: nil)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
     @discardableResult
