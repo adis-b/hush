@@ -4,6 +4,7 @@ import Combine
 import Darwin
 import IOKit.ps
 import UserNotifications
+import Carbon.HIToolbox
 
 fileprivate let blockedBundleIdentifiers: Set<String> = [
     "com.apple.loginwindow",
@@ -51,6 +52,7 @@ class RunningAppsManager: ObservableObject {
 
     private let focusSessionGracePeriodSeconds = 30
     private var timer: Timer?
+    private var focusHotkey: GlobalHotkey?
 
     init() {
         syncToggleStatus()
@@ -73,6 +75,12 @@ class RunningAppsManager: ObservableObject {
         }
 
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, _ in }
+
+        // ⌥⌘H toggles focus from anywhere
+        self.focusHotkey = GlobalHotkey(keyCode: UInt32(kVK_ANSI_H),
+                                        modifiers: UInt32(cmdKey | optionKey)) { [weak self] in
+            self?.toggleFocusSession()
+        }
 
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.tick()
