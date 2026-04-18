@@ -69,12 +69,51 @@ struct SettingsView: View {
                         Text(pct == 0 ? "Off" : "\(pct)%").tag(pct)
                     }
                 }
+
+                Divider()
+
+                Toggle("Start focus when macOS Focus is on", isOn: $manager.mirrorMacFocus)
+
+                if manager.mirrorMacFocus {
+                    if manager.focusFilesReadable {
+                        if manager.availableFocusModes.isEmpty {
+                            Text("No Focus modes set up yet.")
+                                .font(.caption).foregroundStyle(.secondary)
+                        } else {
+                            ForEach(manager.availableFocusModes) { mode in
+                                Toggle(mode.name, isOn: focusModeBinding(for: mode.id))
+                                    .padding(.leading, 16)
+                            }
+                        }
+                    } else {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Hush needs Full Disk Access to read your Focus modes.")
+                                .font(.caption).foregroundStyle(.secondary)
+                            if let err = manager.focusReadError {
+                                Text("errno \(err)").font(.caption2).foregroundStyle(.secondary)
+                            }
+                            Button("Open System Settings", action: manager.openFullDiskAccessSettings)
+                                .controlSize(.small)
+                        }
+                    }
+                }
             }
             .padding(.horizontal, 24)
 
             Spacer()
         }
-        .frame(width: 460, height: 380)
+        .frame(width: 460, height: 420)
+    }
+
+    private func focusModeBinding(for id: String) -> Binding<Bool> {
+        Binding(
+            get: { !manager.excludedFocusModes.contains(id) },
+            set: { include in
+                var set = manager.excludedFocusModes
+                if include { set.remove(id) } else { set.insert(id) }
+                manager.excludedFocusModes = set
+            }
+        )
     }
 }
 

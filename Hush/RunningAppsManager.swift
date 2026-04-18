@@ -5,6 +5,7 @@ import Darwin
 import IOKit.ps
 import UserNotifications
 import Carbon.HIToolbox
+import os.log
 
 fileprivate let blockedBundleIdentifiers: Set<String> = [
     "com.apple.loginwindow",
@@ -41,6 +42,10 @@ class RunningAppsManager: ObservableObject {
     @Published var runningApps: [NSRunningApplication: Date] = [:]
     @Published var toggleStatus: [String: Bool] = [:]
     @Published var focusSessionEndDate: Date?
+    @Published var availableFocusModes: [FocusMode] = []
+    @Published var activeFocusModes: Set<String> = []
+    @Published var focusFilesReadable: Bool = true
+    @Published var focusReadError: Int32?
 
     @AppStorage("minutesUntilClose") var minutesUntilClose: Int = 120
     @AppStorage("com.MagicQuit.toggleStatus") var toggleStatusData: Data = Data()
@@ -49,10 +54,26 @@ class RunningAppsManager: ObservableObject {
     // 0 = aus
     @AppStorage("batteryAwareThresholdPercent") var batteryAwareThresholdPercent: Int = 30
     @AppStorage("lastFocusDuration") var lastFocusDuration: Int = 25
+    @AppStorage("mirrorMacFocus") var mirrorMacFocus: Bool = false
+    @AppStorage("excludedFocusModesData") private var excludedFocusModesData: Data = Data()
 
     private let focusSessionGracePeriodSeconds = 30
+    private let log = OSLog(subsystem: "com.hush.app", category: "manager")
     private var timer: Timer?
     private var focusHotkey: GlobalHotkey?
+    private let focusMirror = FocusMirror()
+    private var focusStartedByMacFocus = false
+
+    var excludedFocusModes: Set<String> {
+        get {
+            (try? JSONDecoder().decode(Set<String>.self, from: excludedFocusModesData)) ?? []
+        }
+        set {
+            if let data = try? JSONEncoder().encode(newValue) {
+                excludedFocusModesData = data
+            }
+        }
+    }
 
     init() {
         syncToggleStatus()
@@ -82,6 +103,12 @@ class RunningAppsManager: ObservableObject {
             self?.toggleFocusSession()
         }
 
+        focusMirror.onChange = { [weak self] in
+            DispatchQueue.main.async { self?.refreshFocusState() }
+        }
+        refreshFocusState()
+        focusMirror.ensureWatching()
+
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.tick()
         }
@@ -95,8 +122,47 @@ class RunningAppsManager: ObservableObject {
         if popupOpen || atMinuteBoundary {
             checkOpenApps()
         }
+        if mirrorMacFocus, atMinuteBoundary {
+            // belt+braces falls DispatchSource ein Event verschluckt hat
+            refreshFocusState()
+            focusMirror.ensureWatching()
+        }
         if let end = focusSessionEndDate, now >= end {
             endFocusSession(reason: .completed)
+        }
+    }
+
+    private func refreshFocusState() {
+        let snapshot = focusMirror.read()
+        availableFocusModes = snapshot.availableModes
+        activeFocusModes = snapshot.activeModeIDs
+        focusFilesReadable = focusMirror.isReadable
+        focusReadError = focusMirror.lastReadError
+        reevaluateFocusMirror()
+    }
+
+    func openFullDiskAccessSettings() {
+        if let url = URL(string: "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_AllFiles") {
+            NSWorkspace.shared.open(url)
+        }
+    }
+
+    private func reevaluateFocusMirror() {
+        guard mirrorMacFocus else {
+            if focusStartedByMacFocus, focusSessionEndDate != nil {
+                endFocusSession(reason: .cancelled)
+                focusStartedByMacFocus = false
+            }
+            return
+        }
+        let active = activeFocusModes.subtracting(excludedFocusModes)
+        if !active.isEmpty {
+            if focusSessionEndDate == nil {
+                startFocusSession(minutes: lastFocusDuration, startedByMacFocus: true)
+            }
+        } else if focusStartedByMacFocus, focusSessionEndDate != nil {
+            endFocusSession(reason: .cancelled)
+            focusStartedByMacFocus = false
         }
     }
 
@@ -129,10 +195,10 @@ class RunningAppsManager: ObservableObject {
         case completed, cancelled
     }
 
-    func startFocusSession(minutes: Int) {
+    func startFocusSession(minutes: Int, startedByMacFocus: Bool = false) {
         lastFocusDuration = minutes
         focusSessionEndDate = Date().addingTimeInterval(Double(minutes * 60))
-        // alles offene = fair game
+        focusStartedByMacFocus = startedByMacFocus
         let frontmost = NSWorkspace.shared.frontmostApplication
         for app in runningApps.keys {
             guard !isBlockedApp(app),
@@ -158,6 +224,7 @@ class RunningAppsManager: ObservableObject {
 
     private func endFocusSession(reason: FocusSessionEndReason) {
         focusSessionEndDate = nil
+        focusStartedByMacFocus = false
         guard reason == .completed else { return }
         let content = UNMutableNotificationContent()
         content.title = "Focus session complete"
@@ -230,6 +297,7 @@ class RunningAppsManager: ObservableObject {
                   toggleStatus[app.localizedName ?? ""] ?? false else { continue }
             if quit(app) {
                 runningApps[app] = nil
+                os_log("quit %{public}@", log: log, type: .info, app.localizedName ?? "?")
             }
         }
     }
