@@ -32,6 +32,8 @@ struct SettingsView: View {
     @AppStorage("autoCheckNewApps") var autoCheckNewApps: Bool = false
     @AppStorage("quitOnDisplaySleep") var quitOnDisplaySleep: Bool = true
     @AppStorage("batteryAwareThresholdPercent") var batteryAwareThresholdPercent: Int = 30
+    @AppStorage("forceTerminateUnsaved") var forceTerminateUnsaved: Bool = false
+    @AppStorage("showCloseButton") var showCloseButton: Bool = false
 
     private let timeOptions = [15, 30, 45, 60, 90, 120, 240, 480, 720, 1440, 2880, 4320]
     private let batteryOptions = [0, 10, 20, 30, 40, 50] // 0 = off
@@ -63,6 +65,10 @@ struct SettingsView: View {
                 Toggle("Automatically check newly opened apps", isOn: $autoCheckNewApps)
 
                 Toggle("Quit checked apps when display sleeps", isOn: $quitOnDisplaySleep)
+
+                Toggle("Force-quit apps with unsaved data", isOn: $forceTerminateUnsaved)
+
+                Toggle("Show ✕ next to each app", isOn: $showCloseButton)
 
                 Picker("Low battery threshold:", selection: $batteryAwareThresholdPercent) {
                     ForEach(batteryOptions, id: \.self) { pct in

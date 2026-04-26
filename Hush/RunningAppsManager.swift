@@ -56,6 +56,7 @@ class RunningAppsManager: ObservableObject {
     @AppStorage("lastFocusDuration") var lastFocusDuration: Int = 25
     @AppStorage("mirrorMacFocus") var mirrorMacFocus: Bool = false
     @AppStorage("excludedFocusModesData") private var excludedFocusModesData: Data = Data()
+    @AppStorage("forceTerminateUnsaved") var forceTerminateUnsaved: Bool = false
 
     private let focusSessionGracePeriodSeconds = 30
     private let log = OSLog(subsystem: "com.hush.app", category: "manager")
@@ -235,9 +236,40 @@ class RunningAppsManager: ObservableObject {
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
+    // default terminate() is the data-safe path. forceTerminateUnsaved
+    // opts in to forceTerminate + SIGKILL fallback (Office-Helper fressen
+    // terminate(), drum SIGKILL).
     @discardableResult
     private func quit(_ app: NSRunningApplication) -> Bool {
+        if forceTerminateUnsaved {
+            let ok = app.forceTerminate()
+            if ok {
+                scheduleSigkillFallback(pid: app.processIdentifier,
+                                        label: app.localizedName ?? "?",
+                                        after: 4)
+            }
+            return ok
+        }
         return app.terminate()
+    }
+
+    // x-button: user explicitly wants this dead, ignore the unsaved setting
+    func forceQuit(_ app: NSRunningApplication) {
+        let pid = app.processIdentifier
+        let name = app.localizedName ?? "?"
+        guard app.forceTerminate() else { return }
+        scheduleSigkillFallback(pid: pid, label: name, after: 4)
+    }
+
+    // FIXME: 4s is arbitrary, just felt right on a fresh MBP
+    private func scheduleSigkillFallback(pid: pid_t, label: String, after delay: TimeInterval) {
+        let log = self.log
+        DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + delay) {
+            if kill(pid, 0) == 0 {
+                os_log("sigkill %{public}@", log: log, type: .info, label)
+                _ = kill(pid, SIGKILL)
+            }
+        }
     }
 
     private func syncToggleStatus() {

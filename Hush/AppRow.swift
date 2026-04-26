@@ -5,6 +5,7 @@ struct AppRow: View {
     let app: (key: NSRunningApplication, value: Date)
     @ObservedObject var manager: RunningAppsManager
     @AppStorage("minutesUntilClose") var minutesUntilClose: Int = 120
+    @AppStorage("showCloseButton") var showCloseButton: Bool = false
 
     private var name: String { app.key.localizedName ?? "Unknown" }
 
@@ -54,6 +55,16 @@ struct AppRow: View {
             }
             .buttonStyle(.plain)
             .disabled(!shouldQuit.wrappedValue)
+
+            if showCloseButton {
+                Button {
+                    manager.forceQuit(app.key)
+                } label: {
+                    Image(systemName: "x.circle")
+                }
+                .buttonStyle(.plain)
+                .disabled(!shouldQuit.wrappedValue)
+            }
         }
     }
 
