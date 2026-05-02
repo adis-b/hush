@@ -19,16 +19,40 @@ struct AppRow: View {
         )
     }
 
+    private var residentBytes: UInt64? { manager.memoryUsage[app.key.processIdentifier] }
+
+    // nil = no dot, calm apps stay quiet
+    private var resourceColor: Color? {
+        guard let bytes = residentBytes else { return nil }
+        let mb = Double(bytes) / 1_048_576.0
+        switch mb {
+        case ..<300: return nil
+        case 300..<1_000: return .green.opacity(0.55)
+        case 1_000..<3_000: return .orange.opacity(0.65)
+        default: return .red.opacity(0.75)
+        }
+    }
+
+    private var resourceTooltip: String {
+        guard let bytes = residentBytes else { return "" }
+        let mb = Double(bytes) / 1_048_576.0
+        return mb >= 1_024
+            ? String(format: "%.1f GB RAM", mb / 1_024)
+            : String(format: "%.0f MB RAM", mb)
+    }
+
     var body: some View {
         let totalSeconds = minutesUntilClose * 60
         let secondsUntilClose = totalSeconds - Int(Date().timeIntervalSince(app.value))
         let isCloseToExpiry = secondsUntilClose < totalSeconds / 4
+        let isExempt = manager.isExemptDuringFocus(app.key)
 
         HStack {
             Toggle("", isOn: shouldQuit)
                 .toggleStyle(CheckboxToggleStyle())
                 .labelsHidden()
 
+            // .icon is cached by NSRunningApplication, no disk hit
             if let nsIcon = app.key.icon {
                 Image(nsImage: nsIcon)
                     .resizable()
@@ -36,14 +60,24 @@ struct AppRow: View {
                     .frame(width: 28, height: 28)
             }
 
+            Circle()
+                .fill(resourceColor ?? .clear)
+                .frame(width: 6, height: 6)
+                .help(resourceTooltip)
+
             Text(name)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .fontWeight(isCloseToExpiry && shouldQuit.wrappedValue ? .bold : .regular)
+                .frame(minWidth: 100, maxWidth: .infinity, alignment: .leading)
+                .fontWeight(isCloseToExpiry && shouldQuit.wrappedValue && !isExempt ? .bold : .regular)
                 .lineLimit(1)
                 .truncationMode(.tail)
                 .foregroundColor(shouldQuit.wrappedValue ? .primary : .gray)
 
-            if shouldQuit.wrappedValue {
+            if isExempt {
+                Text("exempt")
+                    .font(.system(size: 10, weight: .medium))
+                    .foregroundStyle(.secondary)
+                    .help("Opened during this focus session, Hush won't quit it.")
+            } else if shouldQuit.wrappedValue {
                 Text(formatTime(seconds: secondsUntilClose))
                     .fontWeight(isCloseToExpiry ? .bold : .regular)
             }

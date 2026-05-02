@@ -7,6 +7,8 @@ import UserNotifications
 import Carbon.HIToolbox
 import os.log
 
+
+// system stuff we never touch even if ticked
 fileprivate let blockedBundleIdentifiers: Set<String> = [
     "com.apple.loginwindow",
     "com.apple.systemuiserver",
@@ -17,6 +19,15 @@ fileprivate let blockedBundleIdentifiers: Set<String> = [
     "com.apple.notificationcenterui",
     "com.apple.Siri"
 ]
+
+
+fileprivate func residentMemory(forPid pid: pid_t) -> UInt64? {
+    var info = proc_taskinfo()
+    let size = MemoryLayout<proc_taskinfo>.stride
+    let result = proc_pidinfo(pid, PROC_PIDTASKINFO, 0, &info, Int32(size))
+    guard result == Int32(size) else { return nil }
+    return info.pti_resident_size
+}
 
 fileprivate func isOnBatteryBelow(percent threshold: Int) -> Bool {
     guard let snapshot = IOPSCopyPowerSourcesInfo()?.takeRetainedValue(),
@@ -38,14 +49,21 @@ fileprivate func isOnBatteryBelow(percent threshold: Int) -> Bool {
     return false
 }
 
+
+// TODO: split this monster into a couple of smaller managers someday
 class RunningAppsManager: ObservableObject {
     @Published var runningApps: [NSRunningApplication: Date] = [:]
     @Published var toggleStatus: [String: Bool] = [:]
     @Published var focusSessionEndDate: Date?
-    @Published var availableFocusModes: [FocusMode] = []
+
+    // pids of apps that started after focus began. keyed by pid not bundle
+    // so a relaunch gets the exemption but a stale pre-session instance doesn't.
+    @Published private(set) var focusSessionExemptPIDs: Set<pid_t> = []
+    @Published var memoryUsage: [pid_t: UInt64] = [:]
     @Published var activeFocusModes: Set<String> = []
-    @Published var focusFilesReadable: Bool = true
-    @Published var focusReadError: Int32?
+    @Published var availableFocusModes: [FocusMode] = []
+    @Published var focusFilesReadable: Bool = false
+    @Published var focusReadError: String = ""
 
     @AppStorage("minutesUntilClose") var minutesUntilClose: Int = 120
     @AppStorage("com.MagicQuit.toggleStatus") var toggleStatusData: Data = Data()
@@ -54,31 +72,43 @@ class RunningAppsManager: ObservableObject {
     // 0 = aus
     @AppStorage("batteryAwareThresholdPercent") var batteryAwareThresholdPercent: Int = 30
     @AppStorage("lastFocusDuration") var lastFocusDuration: Int = 25
-    @AppStorage("mirrorMacFocus") var mirrorMacFocus: Bool = false
-    @AppStorage("excludedFocusModesData") private var excludedFocusModesData: Data = Data()
     @AppStorage("forceTerminateUnsaved") var forceTerminateUnsaved: Bool = false
+    @AppStorage("mirrorMacFocus") var mirrorMacFocus: Bool = false
+    // JSON [String] of mode ids the user opted out from
+    @AppStorage("excludedFocusModes") var excludedFocusModesData: Data = Data()
 
     private let focusSessionGracePeriodSeconds = 30
-    private let log = OSLog(subsystem: "com.hush.app", category: "manager")
+    private let memorySamplingInterval: TimeInterval = 3
+    private var lastMemorySample: Date = .distantPast
     private var timer: Timer?
     private var focusHotkey: GlobalHotkey?
-    private let focusMirror = FocusMirror()
+    // only auto-end sessions we auto-started
     private var focusStartedByMacFocus = false
+    private var focusMirror: FocusMirror?
 
-    var excludedFocusModes: Set<String> {
-        get {
-            (try? JSONDecoder().decode(Set<String>.self, from: excludedFocusModesData)) ?? []
-        }
-        set {
-            if let data = try? JSONEncoder().encode(newValue) {
-                excludedFocusModesData = data
-            }
-        }
-    }
-
+    private let log = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "RunningAppsManager")
+    
     init() {
+        let defaults = UserDefaults.standard
+        // Migration: hoursUntilClose -> minutesUntilClose
+        if defaults.object(forKey: "minutesUntilClose") == nil,
+           let oldHours = defaults.object(forKey: "hoursUntilClose") as? Int {
+            defaults.set(oldHours * 60, forKey: "minutesUntilClose")
+            defaults.removeObject(forKey: "hoursUntilClose")
+            minutesUntilClose = oldHours * 60
+        }
+        // Migration: altes Bool -> Int %-Schwelle
+        if defaults.object(forKey: "batteryAwareThresholdPercent") == nil,
+           let oldBool = defaults.object(forKey: "batteryAwareThreshold") as? Bool {
+            batteryAwareThresholdPercent = oldBool ? 30 : 0
+            defaults.removeObject(forKey: "batteryAwareThreshold")
+        }
+
         syncToggleStatus()
         addCurrentRunningApps()
+
+        focusMirror = FocusMirror { [weak self] in self?.refreshFocusState() }
+        refreshFocusState()
 
         let workspaceCenter = NSWorkspace.shared.notificationCenter
         workspaceCenter.addObserver(forName: NSWorkspace.didDeactivateApplicationNotification,
@@ -90,6 +120,18 @@ class RunningAppsManager: ObservableObject {
             self.runningApps[app] = Date()
             self.applyAutoCheckIfNeeded(for: app)
         }
+        // app launched while focused = deliberate, exempt
+        workspaceCenter.addObserver(forName: NSWorkspace.didLaunchApplicationNotification,
+                                    object: nil,
+                                    queue: .main) { [weak self] notification in
+            guard let self = self,
+                  let app = notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication,
+                  !self.isBlockedApp(app) else { return }
+            if self.focusSessionEndDate != nil {
+                self.focusSessionExemptPIDs.insert(app.processIdentifier)
+            }
+        }
+        // lid close / display sleep / menu Sleep
         for name in [NSWorkspace.screensDidSleepNotification, NSWorkspace.willSleepNotification] {
             workspaceCenter.addObserver(forName: name, object: nil, queue: .main) { [weak self] _ in
                 self?.handleDisplaysWillSleep()
@@ -104,12 +146,6 @@ class RunningAppsManager: ObservableObject {
             self?.toggleFocusSession()
         }
 
-        focusMirror.onChange = { [weak self] in
-            DispatchQueue.main.async { self?.refreshFocusState() }
-        }
-        refreshFocusState()
-        focusMirror.ensureWatching()
-
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.tick()
         }
@@ -123,49 +159,97 @@ class RunningAppsManager: ObservableObject {
         if popupOpen || atMinuteBoundary {
             checkOpenApps()
         }
-        if mirrorMacFocus, atMinuteBoundary {
-            // belt+braces falls DispatchSource ein Event verschluckt hat
-            refreshFocusState()
-            focusMirror.ensureWatching()
+        if (popupOpen && now.timeIntervalSince(lastMemorySample) >= memorySamplingInterval) || atMinuteBoundary {
+            refreshMemoryUsage()
+            lastMemorySample = now
         }
         if let end = focusSessionEndDate, now >= end {
             endFocusSession(reason: .completed)
         }
+        // backstop in case the DispatchSource dropped an event
+        if mirrorMacFocus, atMinuteBoundary {
+            refreshFocusState()
+        }
     }
 
-    private func refreshFocusState() {
-        let snapshot = focusMirror.read()
-        availableFocusModes = snapshot.availableModes
-        activeFocusModes = snapshot.activeModeIDs
-        focusFilesReadable = focusMirror.isReadable
-        focusReadError = focusMirror.lastReadError
-        reevaluateFocusMirror()
+    // default terminate() is the data-safe macOS path. forceTerminateUnsaved
+    // opts in to forceTerminate + SIGKILL fallback (Office-helper fressen
+    // terminate(), drum SIGKILL).
+    @discardableResult
+    private func quit(_ app: NSRunningApplication) -> Bool {
+        if forceTerminateUnsaved {
+            let pid = app.processIdentifier
+            let label = app.localizedName ?? app.bundleIdentifier ?? "?"
+            let ok = app.forceTerminate()
+            scheduleSigkillFallback(pid: pid, label: label, after: 4.0)
+            return ok
+        }
+        return app.terminate()
+    }
+
+    // x-button: user explicitly wants this dead, ignore the unsaved setting
+    func forceQuit(_ app: NSRunningApplication) {
+        let pid = app.processIdentifier
+        let label = app.localizedName ?? app.bundleIdentifier ?? "?"
+        _ = app.forceTerminate()
+        scheduleSigkillFallback(pid: pid, label: label, after: 4.0)
+        runningApps[app] = nil
+    }
+
+    // FIXME: 4s is arbitrary, just felt right on a fresh MBP
+    private func scheduleSigkillFallback(pid: pid_t, label: String, after delay: TimeInterval) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+            guard let self = self else { return }
+            // signal 0 = probe; 0 alive, -1 gone
+            guard kill(pid, 0) == 0 else { return }
+            os_log("sigkill %{public}@ %d", log: self.log, type: .info, label, pid)
+            _ = kill(pid, SIGKILL)
+        }
+    }
+
+    // MARK: - macOS Focus mirroring
+
+    var excludedFocusModes: Set<String> {
+        get {
+            (try? JSONDecoder().decode([String].self, from: excludedFocusModesData))
+                .map(Set.init) ?? []
+        }
+        set {
+            excludedFocusModesData = (try? JSONEncoder().encode(Array(newValue).sorted())) ?? Data()
+            objectWillChange.send()
+            // re-evaluate, don't wait for next FS change
+            refreshFocusState()
+        }
     }
 
     func openFullDiskAccessSettings() {
-        if let url = URL(string: "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_AllFiles") {
+        if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles") {
             NSWorkspace.shared.open(url)
         }
     }
 
-    private func reevaluateFocusMirror() {
-        guard mirrorMacFocus else {
-            if focusStartedByMacFocus, focusSessionEndDate != nil {
-                endFocusSession(reason: .cancelled)
-                focusStartedByMacFocus = false
-            }
-            return
-        }
-        let active = activeFocusModes.subtracting(excludedFocusModes)
-        if !active.isEmpty {
-            if focusSessionEndDate == nil {
-                startFocusSession(minutes: lastFocusDuration, startedByMacFocus: true)
-            }
-        } else if focusStartedByMacFocus, focusSessionEndDate != nil {
-            endFocusSession(reason: .cancelled)
-            focusStartedByMacFocus = false
+    private func refreshFocusState() {
+        guard let mirror = focusMirror else { return }
+        mirror.ensureWatching() // picks up newly-granted FDA
+
+        focusFilesReadable = mirror.isReadable
+        focusReadError = mirror.lastReadError
+        availableFocusModes = mirror.availableModes()
+        let nowActive = mirror.activeModeIdentifiers()
+        if nowActive != activeFocusModes { activeFocusModes = nowActive }
+
+        guard mirrorMacFocus else { return }
+        let triggering = nowActive.subtracting(excludedFocusModes)
+        let shouldBeFocused = !triggering.isEmpty
+
+        if shouldBeFocused, focusSessionEndDate == nil {
+            startFocusSession(minutes: lastFocusDuration, startedByMacFocus: true)
+        } else if !shouldBeFocused, focusStartedByMacFocus, focusSessionEndDate != nil {
+            cancelFocusSession()
         }
     }
+
+    func reevaluateFocusMirror() { refreshFocusState() }
 
     private func effectiveThresholdSeconds() -> Int {
         if focusSessionEndDate != nil {
@@ -192,14 +276,17 @@ class RunningAppsManager: ObservableObject {
         }
     }
 
+    // MARK: - Focus session
+
     enum FocusSessionEndReason {
         case completed, cancelled
     }
 
     func startFocusSession(minutes: Int, startedByMacFocus: Bool = false) {
+        focusStartedByMacFocus = startedByMacFocus
         lastFocusDuration = minutes
         focusSessionEndDate = Date().addingTimeInterval(Double(minutes * 60))
-        focusStartedByMacFocus = startedByMacFocus
+        focusSessionExemptPIDs = [] // alles offene = fair game
         let frontmost = NSWorkspace.shared.frontmostApplication
         for app in runningApps.keys {
             guard !isBlockedApp(app),
@@ -226,52 +313,33 @@ class RunningAppsManager: ObservableObject {
     private func endFocusSession(reason: FocusSessionEndReason) {
         focusSessionEndDate = nil
         focusStartedByMacFocus = false
+        focusSessionExemptPIDs = []
         guard reason == .completed else { return }
         let content = UNMutableNotificationContent()
         content.title = "Focus session complete"
-        content.body = "Your Mac is a little quieter."
+        content.body = (lastFocusDuration == 25)
+            ? "One Pomodoro down. Take a 5-min break before the next."
+            : "Your Mac is a little quieter."
         let request = UNNotificationRequest(identifier: "hush.focus.complete",
                                             content: content,
                                             trigger: nil)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
-    // default terminate() is the data-safe path. forceTerminateUnsaved
-    // opts in to forceTerminate + SIGKILL fallback (Office-Helper fressen
-    // terminate(), drum SIGKILL).
-    @discardableResult
-    private func quit(_ app: NSRunningApplication) -> Bool {
-        if forceTerminateUnsaved {
-            let ok = app.forceTerminate()
-            if ok {
-                scheduleSigkillFallback(pid: app.processIdentifier,
-                                        label: app.localizedName ?? "?",
-                                        after: 4)
-            }
-            return ok
-        }
-        return app.terminate()
-    }
-
-    // x-button: user explicitly wants this dead, ignore the unsaved setting
-    func forceQuit(_ app: NSRunningApplication) {
-        let pid = app.processIdentifier
-        let name = app.localizedName ?? "?"
-        guard app.forceTerminate() else { return }
-        scheduleSigkillFallback(pid: pid, label: name, after: 4)
-    }
-
-    // FIXME: 4s is arbitrary, just felt right on a fresh MBP
-    private func scheduleSigkillFallback(pid: pid_t, label: String, after delay: TimeInterval) {
-        let log = self.log
-        DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + delay) {
-            if kill(pid, 0) == 0 {
-                os_log("sigkill %{public}@", log: log, type: .info, label)
-                _ = kill(pid, SIGKILL)
+    private func refreshMemoryUsage() {
+        var snapshot: [pid_t: UInt64] = [:]
+        for app in runningApps.keys {
+            let pid = app.processIdentifier
+            guard pid > 0 else { continue }
+            if let bytes = residentMemory(forPid: pid) {
+                snapshot[pid] = bytes
             }
         }
+        if snapshot != memoryUsage {
+            memoryUsage = snapshot
+        }
     }
-
+    
     private func syncToggleStatus() {
         if let status = try? JSONDecoder().decode([String: Bool].self, from: toggleStatusData) {
             toggleStatus = status
@@ -283,7 +351,7 @@ class RunningAppsManager: ObservableObject {
             toggleStatusData = data
         }
     }
-
+    
     private func isBlockedApp(_ app: NSRunningApplication) -> Bool {
         guard app.activationPolicy == .regular,
               let bundleId = app.bundleIdentifier,
@@ -296,10 +364,19 @@ class RunningAppsManager: ObservableObject {
 
     private func addCurrentRunningApps() {
         let now = Date()
+        let inFocus = focusSessionEndDate != nil
         for app in NSWorkspace.shared.runningApplications where !isBlockedApp(app) && runningApps[app] == nil {
             runningApps[app] = now
             applyAutoCheckIfNeeded(for: app)
+            // belt+braces: didLaunchApplicationNotification can drop under load
+            if inFocus {
+                focusSessionExemptPIDs.insert(app.processIdentifier)
+            }
         }
+    }
+
+    func isExemptDuringFocus(_ app: NSRunningApplication) -> Bool {
+        focusSessionEndDate != nil && focusSessionExemptPIDs.contains(app.processIdentifier)
     }
 
     private func applyAutoCheckIfNeeded(for app: NSRunningApplication) {
@@ -309,15 +386,18 @@ class RunningAppsManager: ObservableObject {
         toggleStatus[name] = true
         saveToggleStatus()
     }
-
+    
+    
     private func checkOpenApps() {
         let workspace = NSWorkspace.shared
         let liveApps = Set(workspace.runningApplications)
         let now = Date()
         let thresholdSeconds = Double(effectiveThresholdSeconds())
 
+        // drop dead/blocked entries in one filter pass = one @Published mutation
         runningApps = runningApps.filter { liveApps.contains($0.key) && !isBlockedApp($0.key) }
 
+        // bump the active app's timestamp so the countdown rolls forward
         if let activeApp = workspace.frontmostApplication, !isBlockedApp(activeApp) {
             runningApps[activeApp] = now
         }
@@ -326,10 +406,10 @@ class RunningAppsManager: ObservableObject {
 
         for (app, startDate) in runningApps where now.timeIntervalSince(startDate) > thresholdSeconds {
             guard app.isFinishedLaunching,
-                  toggleStatus[app.localizedName ?? ""] ?? false else { continue }
+                  toggleStatus[app.localizedName ?? ""] ?? false,
+                  !isExemptDuringFocus(app) else { continue }
             if quit(app) {
                 runningApps[app] = nil
-                os_log("quit %{public}@", log: log, type: .info, app.localizedName ?? "?")
             }
         }
     }
