@@ -15,6 +15,21 @@ Fork of [BigBerny/magicquit](https://github.com/BigBerny/magicquit) (after [ccar
 - Quit on display sleep (lid close, idle, menu Sleep).
 - Auto-check newly launched apps (off by default).
 
+## Install
+
+```bash
+brew install adis-b/hush/hush
+```
+
+Or grab the DMG from [Releases](https://github.com/adis-b/hush/releases).
+
+First launch is blocked by Gatekeeper because the build is ad-hoc signed, not notarized. Either go to System Settings → Privacy & Security and click "Open Anyway", or in Terminal:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/Hush.app
+open -a Hush
+```
+
 ## Build
 
 ```bash
