@@ -69,7 +69,7 @@ struct FocusSessionView: View {
                                 .fill(isLastUsed ? Color.hushDot : Color.clear)
                                 .frame(width: 4, height: 4)
                                 .accessibilityHidden(true)
-                            Text("\(minutes)\(String(localized: "timer.minutes.left", comment: "m unit short"))")
+                            Text(String(format: String(localized: "settings.idle.minutes"), minutes))
                                 .font(.system(size: 11, weight: .medium))
                         }
                     }
