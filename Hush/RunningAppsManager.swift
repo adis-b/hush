@@ -316,10 +316,10 @@ class RunningAppsManager: ObservableObject {
         focusSessionExemptPIDs = []
         guard reason == .completed else { return }
         let content = UNMutableNotificationContent()
-        content.title = "Focus session complete"
+        content.title = String(localized: "notification.focus.complete.title", comment: "Notification title")
         content.body = (lastFocusDuration == 25)
-            ? "One Pomodoro down. Take a 5-min break before the next."
-            : "Your Mac is a little quieter."
+            ? String(localized: "notification.focus.pomodoro.body", comment: "Pomodoro completion message")
+            : String(localized: "notification.focus.complete.body", comment: "Generic focus completion message")
         let request = UNNotificationRequest(identifier: "hush.focus.complete",
                                             content: content,
                                             trigger: nil)

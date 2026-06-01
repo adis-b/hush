@@ -7,7 +7,7 @@ struct AppRow: View {
     @AppStorage("minutesUntilClose") var minutesUntilClose: Int = 120
     @AppStorage("showCloseButton") var showCloseButton: Bool = false
 
-    private var name: String { app.key.localizedName ?? "Unknown" }
+    private var name: String { app.key.localizedName ?? String(localized: "approw.unknown", comment: "Unknown app name fallback") }
 
     private var shouldQuit: Binding<Bool> {
         Binding(
@@ -37,8 +37,8 @@ struct AppRow: View {
         guard let bytes = residentBytes else { return "" }
         let mb = Double(bytes) / 1_048_576.0
         return mb >= 1_024
-            ? String(format: "%.1f GB RAM", mb / 1_024)
-            : String(format: "%.0f MB RAM", mb)
+            ? String(format: String(localized: "ram.gb", comment: "GB RAM tooltip"), mb / 1_024)
+            : String(format: String(localized: "ram.mb", comment: "MB RAM tooltip"), mb)
     }
 
     var body: some View {
@@ -73,10 +73,10 @@ struct AppRow: View {
                 .foregroundColor(shouldQuit.wrappedValue ? .primary : .gray)
 
             if isExempt {
-                Text("exempt")
+                Text("approw.exempt.label", comment: "Short status for apps launched during focus")
                     .font(.system(size: 10, weight: .medium))
                     .foregroundStyle(.secondary)
-                    .help("Opened during this focus session, Hush won't quit it.")
+                    .help(String(localized: "approw.exempt.help", comment: "Help for exempt badge"))
             } else if shouldQuit.wrappedValue {
                 Text(formatTime(seconds: secondsUntilClose))
                     .fontWeight(isCloseToExpiry ? .bold : .regular)
@@ -103,8 +103,12 @@ struct AppRow: View {
     }
 
     private func formatTime(seconds: Int) -> String {
-        if seconds >= 3600 { return "\(seconds / 3600)h left" }
-        if seconds >= 60 { return "\(seconds / 60)m left" }
-        return "\(seconds)s left"
+        if seconds >= 3600 {
+            return String(format: String(localized: "timer.hours.left", comment: "Hours left format"), seconds / 3600)
+        }
+        if seconds >= 60 {
+            return String(format: String(localized: "timer.minutes.left", comment: "Minutes left format"), seconds / 60)
+        }
+        return String(format: String(localized: "timer.seconds.left", comment: "Seconds left format"), seconds)
     }
 }

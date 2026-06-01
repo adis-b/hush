@@ -18,7 +18,7 @@ class SettingsWindowController: NSWindowController {
             defer: false
         )
         window.contentViewController = hostingController
-        window.title = "Settings"
+        window.title = String(localized: "settings.window.title", comment: "Settings window title")
         window.contentMinSize = NSSize(width: 540, height: 320)
         window.center()
         self.init(window: window)
@@ -45,11 +45,13 @@ struct SettingsView: View {
 
     private func formatMinutes(_ minutes: Int) -> String {
         if minutes < 60 {
-            return "\(minutes) min"
+            return String(format: String(localized: "timer.minutes.left", comment: "Short form for picker"), minutes)
         } else if minutes % 60 == 0 {
-            return "\(minutes / 60)h"
+            return String(format: String(localized: "timer.hours.left", comment: "Short form for picker"), minutes / 60)
         } else {
-            return "\(minutes / 60)h \(minutes % 60)min"
+            let h = minutes / 60
+            let m = minutes % 60
+            return "\(h)\(String(localized: "timer.hours.left", comment: "h unit")) \(m)\(String(localized: "timer.minutes.left", comment: "m unit"))"
         }
     }
 
@@ -64,30 +66,30 @@ struct SettingsView: View {
     @ViewBuilder
     private var macFocusStatusLine: some View {
         if !mirrorMacFocus {
-            Text("Detects Do Not Disturb, Reduce Interruptions, Work, and any custom Focus mode.")
+            Text("settings.focus.mirror.desc", comment: "Focus mirror description")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         } else if !manager.focusFilesReadable {
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 6) {
-                    Text("Hush can't read your Focus state. Grant Full Disk Access in System Settings, then re-toggle Hush in the FDA list after redeploying.")
+                    Text("settings.focus.fda.error", comment: "Full Disk Access error for Focus mirror")
                         .font(.caption)
                         .foregroundStyle(.red)
-                    Button("Open") { manager.openFullDiskAccessSettings() }
+                    Button(String(localized: "settings.focus.fda.button", comment: "Open FDA settings")) { manager.openFullDiskAccessSettings() }
                         .controlSize(.small)
                 }
-                Text("Diagnostic: \(manager.focusReadError)")
+                Text("\(String(localized: "settings.focus.diagnostic", comment: "Diagnostic label")) \(manager.focusReadError)")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .textSelection(.enabled)
             }
         } else if manager.availableFocusModes.isEmpty {
-            Text("No Focus modes configured on this Mac yet.")
+            Text("settings.focus.no.modes", comment: "No Focus modes message")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         } else {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Trigger Hush when any of these are on:")
+                Text("settings.focus.trigger.desc", comment: "Focus trigger intro")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 ForEach(manager.availableFocusModes) { mode in
@@ -96,7 +98,7 @@ struct SettingsView: View {
                             HStack(spacing: 6) {
                                 Text(mode.name)
                                 if manager.activeFocusModes.contains(mode.id) {
-                                    Text("on")
+                                    Text("settings.focus.mode.on.badge", comment: "Active mode badge")
                                         .font(.caption2)
                                         .padding(.horizontal, 5)
                                         .padding(.vertical, 1)
@@ -133,9 +135,9 @@ struct SettingsView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 96, height: 96)
-                    Text("Hush")
+                    Text("settings.header.appname", comment: "App name in header")
                         .font(.title)
-                    Text("Hush the noise. Reclaim your focus.")
+                    Text("settings.header.slogan", comment: "Slogan in header")
                         .font(.callout)
                         .italic()
                         .foregroundStyle(.secondary)
@@ -146,7 +148,7 @@ struct SettingsView: View {
                         .font(.caption)
                         .monospacedDigit()
                         .padding(.top, 2)
-                        .help("Build identifier, short git commit hash.")
+                        .help(String(localized: "settings.version.help", comment: "Version tooltip"))
                 }
                 .padding(.top, 24)
 
@@ -156,13 +158,13 @@ struct SettingsView: View {
                      horizontalSpacing: 16,
                      verticalSpacing: 12) {
                     GridRow {
-                        Text("Startup:")
+                        Text("settings.startup.label", comment: "Settings row label")
                             .gridColumnAlignment(.trailing)
                             .foregroundStyle(.secondary)
                         LaunchAtLogin.Toggle()
                     }
                     GridRow {
-                        Text("Idle time:")
+                        Text("settings.idle.label", comment: "Settings row label")
                             .foregroundStyle(.secondary)
                         HStack(spacing: 8) {
                             Picker("", selection: $minutesUntilClose) {
@@ -172,61 +174,61 @@ struct SettingsView: View {
                             }
                             .labelsHidden()
                             .frame(width: 120)
-                            Text("until quitting")
+                            Text("settings.until.quitting", comment: "After idle picker")
                                 .foregroundStyle(.secondary)
                         }
                     }
                     GridRow {
-                        Text("Quit button:")
+                        Text("settings.quitbutton.label", comment: "Settings row label")
                             .foregroundStyle(.secondary)
-                        Toggle("Show a button to quit apps manually",
+                        Toggle(String(localized: "settings.toggle.show.close", comment: "Show close button toggle"),
                                isOn: $showCloseButton)
                     }
                     GridRow {
-                        Text("Auto-check:")
+                        Text("settings.autocheck.label", comment: "Settings row label")
                             .foregroundStyle(.secondary)
-                        Toggle("Automatically check newly opened apps",
+                        Toggle(String(localized: "settings.toggle.autocheck", comment: "Auto check toggle"),
                                isOn: $autoCheckNewApps)
                     }
                     GridRow {
-                        Text("On sleep:")
+                        Text("settings.sleep.label", comment: "Settings row label")
                             .foregroundStyle(.secondary)
-                        Toggle("Quit checked apps when the display sleeps",
+                        Toggle(String(localized: "settings.toggle.sleep", comment: "Sleep quit toggle"),
                                isOn: $quitOnDisplaySleep)
                     }
                     GridRow {
-                        Text("Low battery:")
+                        Text("settings.battery.label", comment: "Settings row label")
                             .foregroundStyle(.secondary)
                         HStack(spacing: 8) {
                             Picker("", selection: $batteryAwareThresholdPercent) {
                                 ForEach(batteryOptions, id: \.self) { pct in
-                                    Text(pct == 0 ? "Off" : "\(pct)%").tag(pct)
+                                    Text(pct == 0 ? String(localized: "settings.battery.off", comment: "Battery off") : "\(pct)%").tag(pct)
                                 }
                             }
                             .labelsHidden()
                             .frame(width: 80)
                             Text(batteryAwareThresholdPercent == 0
-                                 ? "ignore battery level"
-                                 : "halve idle time when below this on battery")
+                                 ? String(localized: "settings.battery.ignore", comment: "Battery ignore")
+                                 : String(localized: "settings.battery.halve", comment: "Battery halve"))
                                 .foregroundStyle(.secondary)
                         }
                     }
                     GridRow {
-                        Text("Unsaved data:")
+                        Text("settings.unsaved.label", comment: "Settings row label")
                             .foregroundStyle(.secondary)
                         VStack(alignment: .leading, spacing: 4) {
-                            Toggle("Force-quit even apps with unsaved changes (may lose data)",
+                            Toggle(String(localized: "settings.toggle.forcequit", comment: "Force quit toggle"),
                                    isOn: $forceTerminateUnsaved)
-                            Text("Also escalates to SIGKILL after ~4 s for stuck apps (e.g. Microsoft Office).")
+                            Text(String(localized: "settings.forcequit.explanation", comment: "Force quit explanation"))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
                     }
                     GridRow {
-                        Text("macOS Focus:")
+                        Text("settings.focus.label", comment: "Settings row label")
                             .foregroundStyle(.secondary)
                         VStack(alignment: .leading, spacing: 6) {
-                            Toggle("Start a Hush focus session when a Mac Focus mode turns on",
+                            Toggle(String(localized: "settings.toggle.mirror", comment: "Mirror macOS Focus toggle"),
                                    isOn: $mirrorMacFocus)
                                 .onChange(of: mirrorMacFocus) { _ in manager.reevaluateFocusMirror() }
                             macFocusStatusLine
@@ -241,15 +243,15 @@ struct SettingsView: View {
                     Image(systemName: "cup.and.saucer.fill")
                         .font(.caption2)
                         .foregroundStyle(.tertiary)
-                    Text("Built solo.")
+                    Text(String(localized: "settings.tip.built", comment: "Tip jar built solo"))
                         .font(.caption)
                         .foregroundStyle(.tertiary)
-                    Link("Buy me a coffee.",
+                    Link(String(localized: "settings.tip.coffee", comment: "Buy coffee link"),
                          destination: URL(string: "https://buymeacoffee.com/hushapp")!)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
-                .help("Hush is free and ad-hoc signed by a single developer. If it earned a place in your menu bar, a coffee is appreciated.")
+                .help(String(localized: "settings.tip.help", comment: "Tip jar help text"))
                 .padding(.bottom, 18)
 
                 Spacer(minLength: 0)

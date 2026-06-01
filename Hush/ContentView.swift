@@ -73,7 +73,7 @@ struct ContentView: View {
                         .labelsHidden()
                         .disabled(manager.runningApps.isEmpty)
 
-                    Text("Select All")
+                    Text("content.select.all", comment: "Master checkbox label in the popover")
                         .fontWeight(.semibold)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(manager.runningApps.isEmpty ? .gray : .primary)
@@ -94,8 +94,8 @@ struct ContentView: View {
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
 
-            MenuItemButton(title: "Settings", action: openSettings)
-            MenuItemButton(title: "Quit Hush") { NSApplication.shared.terminate(nil) }
+            MenuItemButton(title: String(localized: "content.menu.settings", comment: "Opens Settings window"), action: openSettings)
+            MenuItemButton(title: String(localized: "content.menu.quit", comment: "Quits the Hush app itself")) { NSApplication.shared.terminate(nil) }
         }
         .frame(width: 314)
         .padding(5)

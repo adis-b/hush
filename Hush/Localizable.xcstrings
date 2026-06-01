@@ -1,0 +1,699 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "content.select.all" : {
+      "comment" : "Label for the master checkbox that selects/deselects all running apps in the popover list.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select All"
+          }
+        }
+      }
+    },
+    "content.menu.settings" : {
+      "comment" : "Title of the button that opens the Settings window from the menu bar popover.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "content.menu.quit" : {
+      "comment" : "Title of the button that quits the Hush app itself from the menu bar popover. Note: this is not the per-app quit button.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quit Hush"
+          }
+        }
+      }
+    },
+    "approw.exempt.label" : {
+      "comment" : "Short status badge shown next to an app that was launched *during* an active focus session and is therefore temporarily exempt from being quit.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "exempt"
+          }
+        }
+      }
+    },
+    "approw.exempt.help" : {
+      "comment" : "Tooltip / help text for the 'exempt' status badge.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opened during this focus session, Hush won't quit it."
+          }
+        }
+      }
+    },
+    "focus.label" : {
+      "comment" : "Label for the focus section in the menu bar popover.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Focus"
+          }
+        }
+      }
+    },
+    "focus.hotkey" : {
+      "comment" : "Keyboard shortcut hint shown next to the Focus label (Command-Option-H).",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥⌘H"
+          }
+        }
+      }
+    },
+    "focus.duration.pomodoro" : {
+      "comment" : "Short label on the 25-minute focus button. Refers to the Pomodoro technique.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro"
+          }
+        }
+      }
+    },
+    "focus.duration.deepwork" : {
+      "comment" : "Short label on the 50-minute focus button.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deep Work"
+          }
+        }
+      }
+    },
+    "focus.duration.ultradian" : {
+      "comment" : "Short label on the 90-minute focus button. Refers to ultradian rhythm / Kleitman cycle.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultradian"
+          }
+        }
+      }
+    },
+    "focus.help.pomodoro" : {
+      "comment" : "Detailed help text for the 25-minute focus button. Contains a specific historical reference (Cirillo 1987) that should be translated appropriately in each language.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "25 min · one Pomodoro (Cirillo, 1987). After it ends, take a 5-min break."
+          }
+        }
+      }
+    },
+    "focus.help.deepwork" : {
+      "comment" : "Detailed help text for the 50-minute focus button.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "50 min · two pomodoros, a Deep Work block."
+          }
+        }
+      }
+    },
+    "focus.help.ultradian" : {
+      "comment" : "Detailed help text for the 90-minute focus button. References Kleitman's ultradian rhythm research.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "90 min · one ultradian alertness cycle (Kleitman's basic rest-activity cycle)."
+          }
+        }
+      }
+    },
+    "focus.help.generic" : {
+      "comment" : "Fallback help text for custom focus durations.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start a %d-minute focus session"
+          }
+        }
+      }
+    },
+    "focus.stop" : {
+      "comment" : "Button title shown while a focus session is running.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop"
+          }
+        }
+      }
+    },
+    "focus.running" : {
+      "comment" : "Live countdown label while a focus session is active. The number is inserted programmatically.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Focus  %d m"
+          }
+        }
+      }
+    },
+    "focus.toggle.help" : {
+      "comment" : "Tooltip for the entire focus section when idle.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥⌘H toggles the focus session"
+          }
+        }
+      }
+    },
+    "focus.stop.help" : {
+      "comment" : "Tooltip for the Stop button while a session is running.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥⌘H · Stop focus session"
+          }
+        }
+      }
+    },
+    "timer.hours.left" : {
+      "comment" : "Time remaining format when more than one hour. Number is inserted by code.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%dh left"
+          }
+        }
+      }
+    },
+    "timer.minutes.left" : {
+      "comment" : "Time remaining format when less than one hour but more than a minute.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%dm left"
+          }
+        }
+      }
+    },
+    "timer.seconds.left" : {
+      "comment" : "Time remaining format when under one minute.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%ds left"
+          }
+        }
+      }
+    },
+    "ram.gb" : {
+      "comment" : "RAM usage display in gigabytes. Used in tooltip.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.1f GB RAM"
+          }
+        }
+      }
+    },
+    "ram.mb" : {
+      "comment" : "RAM usage display in megabytes. Used in tooltip.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.0f MB RAM"
+          }
+        }
+      }
+    },
+    "notification.focus.complete.title" : {
+      "comment" : "Title of the notification shown when a focus session ends.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Focus session complete"
+          }
+        }
+      }
+    },
+    "notification.focus.pomodoro.body" : {
+      "comment" : "Body text for the notification after a 25-minute (Pomodoro) session.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One Pomodoro down. Take a 5-min break before the next."
+          }
+        }
+      }
+    },
+    "notification.focus.complete.body" : {
+      "comment" : "Body text for the notification after a non-Pomodoro focus session.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Mac is a little quieter."
+          }
+        }
+      }
+    },
+    "settings.startup.label" : {
+      "comment" : "Label in Settings for the Launch at Login row.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Startup:"
+          }
+        }
+      }
+    },
+    "settings.idle.label" : {
+      "comment" : "Label in Settings for the idle timeout picker.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idle time:"
+          }
+        }
+      }
+    },
+    "settings.quitbutton.label" : {
+      "comment" : "Label in Settings for the manual close button toggle.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quit button:"
+          }
+        }
+      }
+    },
+    "settings.autocheck.label" : {
+      "comment" : "Label in Settings for the auto-check new apps toggle.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto-check:"
+          }
+        }
+      }
+    },
+    "settings.sleep.label" : {
+      "comment" : "Label in Settings for the quit on display sleep toggle.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On sleep:"
+          }
+        }
+      }
+    },
+    "settings.battery.label" : {
+      "comment" : "Label in Settings for the low battery threshold picker.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Low battery:"
+          }
+        }
+      }
+    },
+    "settings.unsaved.label" : {
+      "comment" : "Label in Settings for the force-quit unsaved data toggle.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unsaved data:"
+          }
+        }
+      }
+    },
+    "settings.focus.label" : {
+      "comment" : "Label in Settings for the macOS Focus mirroring section.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS Focus:"
+          }
+        }
+      }
+    },
+    "settings.window.title" : {
+      "comment" : "Title of the Settings window.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "settings.header.appname" : {
+      "comment" : "App name in the Settings header (brand, consider keeping English).",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush"
+          }
+        }
+      }
+    },
+    "settings.header.slogan" : {
+      "comment" : "Slogan in Settings header (brand voice).",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush the noise. Reclaim your focus."
+          }
+        }
+      }
+    },
+    "settings.version.help" : {
+      "comment" : "Tooltip explaining the version + git hash in Settings.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Build identifier, short git commit hash."
+          }
+        }
+      }
+    },
+    "settings.focus.mirror.desc" : {
+      "comment" : "Description when macOS Focus mirror is off.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detects Do Not Disturb, Reduce Interruptions, Work, and any custom Focus mode."
+          }
+        }
+      }
+    },
+    "settings.focus.fda.error" : {
+      "comment" : "Error message when Full Disk Access is missing for Focus mirror.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush can't read your Focus state. Grant Full Disk Access in System Settings, then re-toggle Hush in the FDA list after redeploying."
+          }
+        }
+      }
+    },
+    "settings.focus.fda.button" : {
+      "comment" : "Button to open Full Disk Access settings.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        }
+      }
+    },
+    "settings.focus.diagnostic" : {
+      "comment" : "Prefix for Focus mirror diagnostic error.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diagnostic:"
+          }
+        }
+      }
+    },
+    "settings.focus.no.modes" : {
+      "comment" : "Message when no macOS Focus modes are configured.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Focus modes configured on this Mac yet."
+          }
+        }
+      }
+    },
+    "settings.focus.trigger.desc" : {
+      "comment" : "Intro text above the list of Focus modes to trigger on.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trigger Hush when any of these are on:"
+          }
+        }
+      }
+    },
+    "settings.focus.mode.on.badge" : {
+      "comment" : "Small badge shown next to an active macOS Focus mode.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "on"
+          }
+        }
+      }
+    },
+    "settings.until.quitting" : {
+      "comment" : "Text after the idle time picker.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "until quitting"
+          }
+        }
+      }
+    },
+    "settings.toggle.show.close" : {
+      "comment" : "Toggle title for showing manual close button per app.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show a button to quit apps manually"
+          }
+        }
+      }
+    },
+    "settings.toggle.autocheck" : {
+      "comment" : "Toggle title for automatically checking new apps.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatically check newly opened apps"
+          }
+        }
+      }
+    },
+    "settings.toggle.sleep" : {
+      "comment" : "Toggle title for quitting on display sleep.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quit checked apps when the display sleeps"
+          }
+        }
+      }
+    },
+    "settings.battery.off" : {
+      "comment" : "Option in battery picker for disabled.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Off"
+          }
+        }
+      }
+    },
+    "settings.battery.ignore" : {
+      "comment" : "Description when battery awareness is off.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ignore battery level"
+          }
+        }
+      }
+    },
+    "settings.battery.halve" : {
+      "comment" : "Description for battery threshold.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "halve idle time when below this on battery"
+          }
+        }
+      }
+    },
+    "settings.toggle.forcequit" : {
+      "comment" : "Toggle title for force-quitting unsaved data.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Force-quit even apps with unsaved changes (may lose data)"
+          }
+        }
+      }
+    },
+    "settings.forcequit.explanation" : {
+      "comment" : "Explanation text under the force-quit toggle.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Also escalates to SIGKILL after ~4 s for stuck apps (e.g. Microsoft Office)."
+          }
+        }
+      }
+    },
+    "settings.toggle.mirror" : {
+      "comment" : "Toggle title for mirroring macOS Focus.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start a Hush focus session when a Mac Focus mode turns on"
+          }
+        }
+      }
+    },
+    "settings.tip.built" : {
+      "comment" : "Tip jar line 1 (brand voice).",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Built solo."
+          }
+        }
+      }
+    },
+    "settings.tip.coffee" : {
+      "comment" : "Tip jar link text.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buy me a coffee."
+          }
+        }
+      }
+    },
+    "settings.tip.help" : {
+      "comment" : "Long help text for the tip jar row.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush is free and ad-hoc signed by a single developer. If it earned a place in your menu bar, a coffee is appreciated."
+          }
+        }
+      }
+    },
+    "approw.unknown" : {
+      "comment" : "Fallback name when an app has no localized name.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown"
+          }
+        }
+      }
+    },
+    "focus.minute.session" : {
+      "comment" : "Part of accessibility label: 'X minute Focus session'.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "minute Focus session"
+          }
+        }
+      }
+    },
+    "focus.starts.this" : {
+      "comment" : "Part of button help text.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "starts this duration"
+          }
+        }
+      }
+    },
+    "privacy.focusstatus" : {
+      "comment" : "Privacy description shown by macOS when requesting Focus status access (for mirroring).",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush mirrors your active macOS Focus modes so it can start a Hush focus session automatically."
+          }
+        }
+      }
+    },
+    "privacy.appleevents" : {
+      "comment" : "Privacy description for Apple Events / scripting to quit apps.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Needed to close apps"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
