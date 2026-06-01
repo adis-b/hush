@@ -232,6 +232,39 @@
         }
       }
     },
+    "settings.idle.minutes" : {
+      "comment" : "Short duration for the idle time picker (under 1 hour).",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%dm"
+          }
+        }
+      }
+    },
+    "settings.idle.hours" : {
+      "comment" : "Short duration for the idle time picker (exact hours).",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%dh"
+          }
+        }
+      }
+    },
+    "settings.idle.hoursAndMinutes" : {
+      "comment" : "Mixed duration for the idle time picker (e.g. 1h 30m).",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%dh %dmin"
+          }
+        }
+      }
+    },
     "ram.gb" : {
       "comment" : "RAM usage display in gigabytes. Used in tooltip.",
       "localizations" : {

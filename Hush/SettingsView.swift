@@ -45,13 +45,13 @@ struct SettingsView: View {
 
     private func formatMinutes(_ minutes: Int) -> String {
         if minutes < 60 {
-            return String(format: String(localized: "timer.minutes.left", comment: "Short form for picker"), minutes)
+            return String(format: String(localized: "settings.idle.minutes"), minutes)
         } else if minutes % 60 == 0 {
-            return String(format: String(localized: "timer.hours.left", comment: "Short form for picker"), minutes / 60)
+            return String(format: String(localized: "settings.idle.hours"), minutes / 60)
         } else {
             let h = minutes / 60
             let m = minutes % 60
-            return "\(h)\(String(localized: "timer.hours.left", comment: "h unit")) \(m)\(String(localized: "timer.minutes.left", comment: "m unit"))"
+            return String(format: String(localized: "settings.idle.hoursAndMinutes"), h, m)
         }
     }
 
