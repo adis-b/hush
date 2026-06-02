@@ -48,47 +48,57 @@ struct FocusSessionView: View {
     }
 
     private var idleView: some View {
-        HStack(alignment: .center, spacing: 6) {
-            Text("focus.label", comment: "Focus section label")
-                .fontWeight(.semibold)
-            Text("focus.hotkey", comment: "Hotkey hint")
-                .font(.system(size: 10))
-                .foregroundStyle(.secondary)
-            Spacer()
-            ForEach(durations, id: \.self) { minutes in
-                let isLastUsed = (minutes == lastFocusDuration)
-                Button(action: { manager.startFocusSession(minutes: minutes) }) {
-                    VStack(spacing: 1) {
-                        Text(durationLabel(minutes))
-                            .font(.system(size: 8, weight: .regular))
-                            .foregroundStyle(.secondary)
-                        // dot marks which duration ⌥⌘H starts. always rendered
-                        // (clear on the rest) so the text aligns across buttons
-                        HStack(spacing: 3) {
-                            Circle()
-                                .fill(isLastUsed ? Color.hushDot : Color.clear)
-                                .frame(width: 4, height: 4)
-                                .accessibilityHidden(true)
-                            Text(String(format: String(localized: "settings.idle.minutes"), minutes))
-                                .font(.system(size: 11, weight: .medium))
-                        }
-                    }
-                    .padding(.vertical, 3)
-                    .padding(.horizontal, 8)
-                    .background(
-                        RoundedRectangle(cornerRadius: 4)
-                            .fill(Color.primary.opacity(0.08))
-                    )
-                    .contentShape(Rectangle())
-                }
-                .buttonStyle(PlainButtonStyle())
-                .help(isLastUsed
-                      ? "\(durationHelp(minutes)) \(String(localized: "focus.hotkey", comment: "Hotkey")) \(String(localized: "focus.starts.this", comment: "Help continuation"))"
-                      : durationHelp(minutes))
-                .accessibilityLabel(isLastUsed
-                                    ? "\(minutes) \(String(localized: "focus.minute.session", comment: "Accessibility unit")) , \(String(localized: "focus.hotkey", comment: "Hotkey")) starts this"
-                                    : "\(minutes) \(String(localized: "focus.minute.session", comment: "Accessibility unit"))")
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 6) {
+                Text("focus.label", comment: "Focus section label")
+                    .fontWeight(.semibold)
+                Text("focus.hotkey", comment: "Hotkey hint")
+                    .font(.system(size: 10))
+                    .foregroundStyle(.secondary)
             }
+            HStack {
+                Spacer(minLength: 0)
+                HStack(spacing: 6) {
+                    ForEach(durations, id: \.self) { minutes in
+                        let isLastUsed = (minutes == lastFocusDuration)
+                        Button(action: { manager.startFocusSession(minutes: minutes) }) {
+                            VStack(spacing: 1) {
+                                Text(durationLabel(minutes))
+                                    .font(.system(size: 8, weight: .regular))
+                                    .foregroundStyle(.secondary)
+                                // dot marks which duration ⌥⌘H starts. always rendered
+                                // (clear on the rest) so the text aligns across buttons
+                                HStack(spacing: 3) {
+                                    Circle()
+                                        .fill(isLastUsed ? Color.hushDot : Color.clear)
+                                        .frame(width: 4, height: 4)
+                                        .accessibilityHidden(true)
+                                    Text(String(format: String(localized: "settings.idle.minutes"), minutes))
+                                        .font(.system(size: 11, weight: .medium))
+                                }
+                                .frame(width: 48, alignment: .center)
+                            }
+                            .padding(.vertical, 3)
+                            .padding(.horizontal, 8)
+                            .frame(minWidth: 88, alignment: .center)
+                            .background(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .fill(Color.primary.opacity(0.08))
+                            )
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .help(isLastUsed
+                              ? "\(durationHelp(minutes)) \(String(localized: "focus.hotkey", comment: "Hotkey")) \(String(localized: "focus.starts.this", comment: "Help continuation"))"
+                              : durationHelp(minutes))
+                        .accessibilityLabel(isLastUsed
+                                            ? "\(minutes) \(String(localized: "focus.minute.session", comment: "Accessibility unit")) , \(String(localized: "focus.hotkey", comment: "Hotkey")) starts this"
+                                            : "\(minutes) \(String(localized: "focus.minute.session", comment: "Accessibility unit"))")
+                    }
+                }
+                Spacer(minLength: 0)
+            }
+            .frame(maxWidth: .infinity)
         }
         .help(String(localized: "focus.toggle.help", comment: "Tooltip for focus section"))
     }

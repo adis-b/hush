@@ -161,7 +161,9 @@ struct SettingsView: View {
                         Text("settings.startup.label", comment: "Settings row label")
                             .gridColumnAlignment(.trailing)
                             .foregroundStyle(.secondary)
-                        LaunchAtLogin.Toggle()
+                        LaunchAtLogin.Toggle {
+                            Text("settings.toggle.launchatlogin", comment: "Label inside the Launch at Login toggle")
+                        }
                     }
                     GridRow {
                         Text("settings.idle.label", comment: "Settings row label")

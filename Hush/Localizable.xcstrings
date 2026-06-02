@@ -1,141 +1,62 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "content.select.all" : {
-      "comment" : "Label for the master checkbox that selects/deselects all running apps in the popover list.",
+    "" : {
+
+    },
+    "%@ · %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select All"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alle auswählen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tout sélectionner"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seleccionar todo"
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
           }
         }
       }
     },
-    "content.menu.settings" : {
-      "comment" : "Title of the button that opens the Settings window from the menu bar popover.",
+    "%@ %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Einstellungen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Réglages"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajustes"
+            "state" : "new",
+            "value" : "%1$@ %2$@"
           }
         }
       }
     },
-    "content.menu.quit" : {
-      "comment" : "Title of the button that quits the Hush app itself from the menu bar popover. Note: this is not the per-app quit button.",
+    "%lld %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quit Hush"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hush beenden"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quitter Hush"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Salir de Hush"
+            "state" : "new",
+            "value" : "%1$lld %2$@"
           }
         }
       }
     },
-    "approw.exempt.label" : {
-      "comment" : "Short status badge shown next to an app that was launched *during* an active focus session and is therefore temporarily exempt from being quit.",
+    "%lld %@ , %@ starts this" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "exempt"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ausgenommen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "exempté"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "exento"
+            "state" : "new",
+            "value" : "%1$lld %2$@ , %3$@ starts this"
           }
         }
       }
     },
     "approw.exempt.help" : {
-      "comment" : "Tooltip / help text for the 'exempt' status badge.",
+      "comment" : "Help for exempt badge",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Opened during this focus session, Hush won't quit it."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Während dieser Fokus-Sitzung geöffnet, Hush wird es nicht beenden."
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvert pendant cette session Focus, Hush ne le fermera pas."
+            "value" : "Opened during this focus session, Hush won't quit it."
           }
         },
         "es" : {
@@ -143,106 +64,176 @@
             "state" : "translated",
             "value" : "Abierto durante esta sesión Focus, Hush no lo cerrará."
           }
-        }
-      }
-    },
-    "focus.label" : {
-      "comment" : "Label for the focus section in the menu bar popover.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Focus"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fokus"
-          }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Focus"
+            "value" : "Ouvert pendant cette session Focus, Hush ne le fermera pas."
+          }
+        }
+      }
+    },
+    "approw.exempt.label" : {
+      "comment" : "Short status for apps launched during focus",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ausgenommen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "exempt"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Focus"
-          }
-        }
-      }
-    },
-    "focus.hotkey" : {
-      "comment" : "Keyboard shortcut hint shown next to the Focus label (Command-Option-H).",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "⌥⌘H"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "⌥⌘H"
+            "value" : "exento"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "⌥⌘H"
+            "value" : "exempté"
+          }
+        }
+      }
+    },
+    "approw.unknown" : {
+      "comment" : "Unknown app name fallback",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unbekannt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "⌥⌘H"
-          }
-        }
-      }
-    },
-    "focus.duration.pomodoro" : {
-      "comment" : "Short label on the 25-minute focus button. Refers to the Pomodoro technique.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pomodoro"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pomodoro"
+            "value" : "Desconocido"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pomodoro"
+            "value" : "Inconnu"
+          }
+        }
+      }
+    },
+    "content.menu.quit" : {
+      "comment" : "Quits the Hush app itself",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush beenden"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quit Hush"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pomodoro"
+            "value" : "Salir de Hush"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitter Hush"
+          }
+        }
+      }
+    },
+    "content.menu.settings" : {
+      "comment" : "Opens Settings window",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réglages"
+          }
+        }
+      }
+    },
+    "content.select.all" : {
+      "comment" : "Master checkbox label in the popover",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle auswählen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select All"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccionar todo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout sélectionner"
           }
         }
       }
     },
     "focus.duration.deepwork" : {
-      "comment" : "Short label on the 50-minute focus button.",
+      "comment" : "Short label on 50 min button",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deep Work"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deep Work"
           }
         },
-        "de" : {
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deep Work"
@@ -253,31 +244,48 @@
             "state" : "translated",
             "value" : "Deep Work"
           }
+        }
+      }
+    },
+    "focus.duration.pomodoro" : {
+      "comment" : "Short label on 25 min button",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro"
+          }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deep Work"
+            "value" : "Pomodoro"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro"
           }
         }
       }
     },
     "focus.duration.ultradian" : {
-      "comment" : "Short label on the 90-minute focus button. Refers to ultradian rhythm / Kleitman cycle.",
+      "comment" : "Short label on 90 min button",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ultradian"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ultradian"
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ultradian"
@@ -288,57 +296,28 @@
             "state" : "translated",
             "value" : "Ultradian"
           }
-        }
-      }
-    },
-    "focus.help.pomodoro" : {
-      "comment" : "Detailed help text for the 25-minute focus button. Contains a specific historical reference (Cirillo 1987) that should be translated appropriately in each language.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "25 min · one Pomodoro (Cirillo, 1987). After it ends, take a 5-min break."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "25 Min · ein Pomodoro (Cirillo, 1987). Danach 5 Min Pause."
-          }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "25 min · un Pomodoro (Cirillo, 1987). À la fin, prenez une pause de 5 min."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "25 min · un Pomodoro (Cirillo, 1987). Al terminar, toma un descanso de 5 min."
+            "value" : "Ultradian"
           }
         }
       }
     },
     "focus.help.deepwork" : {
-      "comment" : "Detailed help text for the 50-minute focus button.",
+      "comment" : "Help for 50 min button",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "50 min · two pomodoros, a Deep Work block."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "50 Min · zwei Pomodori, ein Deep-Work-Block."
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "50 min · deux pomodoros, un bloc Deep Work."
+            "value" : "50 min · two pomodoros, a Deep Work block."
           }
         },
         "es" : {
@@ -346,57 +325,28 @@
             "state" : "translated",
             "value" : "50 min · dos pomodoros, un bloque de Deep Work."
           }
-        }
-      }
-    },
-    "focus.help.ultradian" : {
-      "comment" : "Detailed help text for the 90-minute focus button. References Kleitman's ultradian rhythm research.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "90 min · one ultradian alertness cycle (Kleitman's basic rest-activity cycle)."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "90 Min · ein ultradianer Wachsamkeitszyklus (Kleitmans grundlegender Ruhe-Aktivitäts-Zyklus)."
-          }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "90 min · un cycle ultradien de vigilance (cycle repos-activité de base de Kleitman)."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "90 min · un ciclo de alerta ultradiano (ciclo básico de reposo-actividad de Kleitman)."
+            "value" : "50 min · deux pomodoros, un bloc Deep Work."
           }
         }
       }
     },
     "focus.help.generic" : {
-      "comment" : "Fallback help text for custom focus durations.",
+      "comment" : "Fallback help",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start a %d-minute focus session"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eine %d-minütige Fokus-Sitzung starten"
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Démarrer une session Focus de %d minutes"
+            "value" : "Start a %d-minute focus session"
           }
         },
         "es" : {
@@ -404,28 +354,231 @@
             "state" : "translated",
             "value" : "Iniciar una sesión Focus de %d minutos"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Démarrer une session Focus de %d minutes"
+          }
+        }
+      }
+    },
+    "focus.help.pomodoro" : {
+      "comment" : "Help for 25 min button",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "25 Min · ein Pomodoro (Cirillo, 1987). Danach 5 Min Pause."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "25 min · one Pomodoro (Cirillo, 1987). After it ends, take a 5-min break."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "25 min · un Pomodoro (Cirillo, 1987). Al terminar, toma un descanso de 5 min."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "25 min · un Pomodoro (Cirillo, 1987). À la fin, prenez une pause de 5 min."
+          }
+        }
+      }
+    },
+    "focus.help.ultradian" : {
+      "comment" : "Help for 90 min button",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "90 Min · ein ultradianer Wachsamkeitszyklus (Kleitmans grundlegender Ruhe-Aktivitäts-Zyklus)."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "90 min · one ultradian alertness cycle (Kleitman's basic rest-activity cycle)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "90 min · un ciclo de alerta ultradiano (ciclo básico de reposo-actividad de Kleitman)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "90 min · un cycle ultradien de vigilance (cycle repos-activité de base de Kleitman)."
+          }
+        }
+      }
+    },
+    "focus.hotkey" : {
+      "comment" : "Hotkey\nHotkey hint",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥⌘H"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥⌘H"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥⌘H"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥⌘H"
+          }
+        }
+      }
+    },
+    "focus.label" : {
+      "comment" : "Focus section label",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fokus"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Focus"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Focus"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Focus"
+          }
+        }
+      }
+    },
+    "focus.minute.session" : {
+      "comment" : "Accessibility unit",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minuten-Fokus-Sitzung"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "minute Focus session"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "min de sesión Focus"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "min de session Focus"
+          }
+        }
+      }
+    },
+    "focus.running" : {
+      "comment" : "Live countdown label",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fokus %d Min"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Focus  %d m"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Focus %d min"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Focus %d min"
+          }
+        }
+      }
+    },
+    "focus.starts.this" : {
+      "comment" : "Help continuation",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "startet diese Dauer"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "starts this duration"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "inicia esta duración"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "démarre cette durée"
+          }
         }
       }
     },
     "focus.stop" : {
-      "comment" : "Button title shown while a focus session is running.",
+      "comment" : "Stop button while session running",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stopp"
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Arrêter"
+            "value" : "Stop"
           }
         },
         "es" : {
@@ -433,86 +586,28 @@
             "state" : "translated",
             "value" : "Detener"
           }
-        }
-      }
-    },
-    "focus.running" : {
-      "comment" : "Live countdown label while a focus session is active. The number is inserted programmatically.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Focus  %d m"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fokus %d Min"
-          }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Focus %d min"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Focus %d min"
-          }
-        }
-      }
-    },
-    "focus.toggle.help" : {
-      "comment" : "Tooltip for the entire focus section when idle.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "⌥⌘H toggles the focus session"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "⌥⌘H schaltet die Fokus-Sitzung um"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "⌥⌘H bascule la session Focus"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "⌥⌘H alterna la sesión Focus"
+            "value" : "Arrêter"
           }
         }
       }
     },
     "focus.stop.help" : {
-      "comment" : "Tooltip for the Stop button while a session is running.",
+      "comment" : "Help for Stop button",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "⌥⌘H · Stop focus session"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "⌥⌘H · Fokus-Sitzung stoppen"
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "⌥⌘H · Arrêter la session Focus"
+            "value" : "⌥⌘H · Stop focus session"
           }
         },
         "es" : {
@@ -520,193 +615,207 @@
             "state" : "translated",
             "value" : "⌥⌘H · Detener la sesión Focus"
           }
-        }
-      }
-    },
-    "timer.hours.left" : {
-      "comment" : "Time remaining format when more than one hour. Number is inserted by code.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%dh left"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d Std. übrig"
-          }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d h restantes"
+            "value" : "⌥⌘H · Arrêter la session Focus"
+          }
+        }
+      }
+    },
+    "focus.toggle.help" : {
+      "comment" : "Tooltip for focus section",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥⌘H schaltet die Fokus-Sitzung um"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥⌘H toggles the focus session"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d h restantes"
-          }
-        }
-      }
-    },
-    "timer.minutes.left" : {
-      "comment" : "Time remaining format when less than one hour but more than a minute.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%dm left"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d Min übrig"
+            "value" : "⌥⌘H alterna la sesión Focus"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d min restantes"
+            "value" : "⌥⌘H bascule la session Focus"
+          }
+        }
+      }
+    },
+    "notification.focus.complete.body" : {
+      "comment" : "Generic focus completion message",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dein Mac ist etwas ruhiger."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Mac is a little quieter."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d min restantes"
-          }
-        }
-      }
-    },
-    "timer.seconds.left" : {
-      "comment" : "Time remaining format when under one minute.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%ds left"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d Sek. übrig"
+            "value" : "Tu Mac está un poco más tranquilo."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d s restantes"
+            "value" : "Votre Mac est un peu plus calme."
+          }
+        }
+      }
+    },
+    "notification.focus.complete.title" : {
+      "comment" : "Notification title",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fokus-Sitzung abgeschlossen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Focus session complete"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d s restantes"
-          }
-        }
-      }
-    },
-    "settings.idle.minutes" : {
-      "comment" : "Short duration for the idle time picker (under 1 hour).",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%dm"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d Min"
+            "value" : "Sesión Focus completada"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d min"
+            "value" : "Session Focus terminée"
+          }
+        }
+      }
+    },
+    "notification.focus.pomodoro.body" : {
+      "comment" : "Pomodoro completion message",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein Pomodoro geschafft. Mach eine 5-Min-Pause vor dem nächsten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One Pomodoro down. Take a 5-min break before the next."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d min"
-          }
-        }
-      }
-    },
-    "settings.idle.hours" : {
-      "comment" : "Short duration for the idle time picker (exact hours).",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%dh"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d Std."
+            "value" : "Un Pomodoro hecho. Tómate un descanso de 5 min antes del siguiente."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d h"
+            "value" : "Un Pomodoro de fait. Prenez une pause de 5 min avant le suivant."
+          }
+        }
+      }
+    },
+    "privacy.appleevents" : {
+      "comment" : "Privacy description for Apple Events / scripting to quit apps.",
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zum Schließen von Apps benötigt"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Needed to close apps"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d h"
-          }
-        }
-      }
-    },
-    "settings.idle.hoursAndMinutes" : {
-      "comment" : "Mixed duration for the idle time picker (e.g. 1h 30m).",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%dh %dmin"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%d Std. %d Min"
+            "value" : "Necesario para cerrar apps"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d h %d min"
+            "value" : "Nécessaire pour fermer des apps"
+          }
+        }
+      }
+    },
+    "privacy.focusstatus" : {
+      "comment" : "Privacy description shown by macOS when requesting Focus status access (for mirroring).",
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush spiegelt deine aktiven macOS-Fokus-Modi, damit es automatisch eine Hush-Fokus-Sitzung starten kann."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush mirrors your active macOS Focus modes so it can start a Hush focus session automatically."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d h %d min"
+            "value" : "Hush refleja tus modos Focus de macOS activos para poder iniciar automáticamente una sesión Focus de Hush."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush reflète vos modes Focus macOS actifs pour pouvoir démarrer automatiquement une session Focus Hush."
           }
         }
       }
     },
     "ram.gb" : {
-      "comment" : "RAM usage display in gigabytes. Used in tooltip.",
+      "comment" : "GB RAM tooltip",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.1f GB RAM"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%.1f GB RAM"
           }
         },
-        "de" : {
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%.1f GB RAM"
@@ -717,25 +826,25 @@
             "state" : "translated",
             "value" : "%.1f Go RAM"
           }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%.1f GB RAM"
-          }
         }
       }
     },
     "ram.mb" : {
-      "comment" : "RAM usage display in megabytes. Used in tooltip.",
+      "comment" : "MB RAM tooltip",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.0f MB RAM"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%.0f MB RAM"
           }
         },
-        "de" : {
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%.0f MB RAM"
@@ -746,208 +855,22 @@
             "state" : "translated",
             "value" : "%.0f Mo RAM"
           }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%.0f MB RAM"
-          }
-        }
-      }
-    },
-    "notification.focus.complete.title" : {
-      "comment" : "Title of the notification shown when a focus session ends.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Focus session complete"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fokus-Sitzung abgeschlossen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Session Focus terminée"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sesión Focus completada"
-          }
-        }
-      }
-    },
-    "notification.focus.pomodoro.body" : {
-      "comment" : "Body text for the notification after a 25-minute (Pomodoro) session.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "One Pomodoro down. Take a 5-min break before the next."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ein Pomodoro geschafft. Mach eine 5-Min-Pause vor dem nächsten."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un Pomodoro de fait. Prenez une pause de 5 min avant le suivant."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Un Pomodoro hecho. Tómate un descanso de 5 min antes del siguiente."
-          }
-        }
-      }
-    },
-    "notification.focus.complete.body" : {
-      "comment" : "Body text for the notification after a non-Pomodoro focus session.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your Mac is a little quieter."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dein Mac ist etwas ruhiger."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Votre Mac est un peu plus calme."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tu Mac está un poco más tranquilo."
-          }
-        }
-      }
-    },
-    "settings.startup.label" : {
-      "comment" : "Label in Settings for the Launch at Login row.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Startup:"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start:"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Démarrage :"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inicio:"
-          }
-        }
-      }
-    },
-    "settings.idle.label" : {
-      "comment" : "Label in Settings for the idle timeout picker.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Idle time:"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Leerlaufzeit:"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temps d'inactivité :"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tiempo de inactividad:"
-          }
-        }
-      }
-    },
-    "settings.quitbutton.label" : {
-      "comment" : "Label in Settings for the manual close button toggle.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quit button:"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beenden-Schaltfläche:"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bouton Quitter :"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Botón Salir:"
-          }
         }
       }
     },
     "settings.autocheck.label" : {
-      "comment" : "Label in Settings for the auto-check new apps toggle.",
+      "comment" : "Settings row label",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto-check:"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatisch prüfen:"
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vérification auto :"
+            "value" : "Auto-check:"
           }
         },
         "es" : {
@@ -955,57 +878,86 @@
             "state" : "translated",
             "value" : "Comprobación auto:"
           }
-        }
-      }
-    },
-    "settings.sleep.label" : {
-      "comment" : "Label in Settings for the quit on display sleep toggle.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "On sleep:"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beim Schlaf:"
-          }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "En veille :"
+            "value" : "Vérification auto :"
+          }
+        }
+      }
+    },
+    "settings.battery.halve" : {
+      "comment" : "Battery halve",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leerlaufzeit halbieren, wenn Akku darunter ist"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "halve idle time when below this on battery"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Al dormir:"
+            "value" : "reducir a la mitad el tiempo de inactividad si está por debajo con batería"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "réduire de moitié le temps d'inactivité si en dessous sur batterie"
+          }
+        }
+      }
+    },
+    "settings.battery.ignore" : {
+      "comment" : "Battery ignore",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Akku-Stand ignorieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ignore battery level"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ignorar nivel de batería"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ignorer le niveau de batterie"
           }
         }
       }
     },
     "settings.battery.label" : {
-      "comment" : "Label in Settings for the low battery threshold picker.",
+      "comment" : "Settings row label",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Low battery:"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Niedriger Akku:"
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Batterie faible :"
+            "value" : "Low battery:"
           }
         },
         "es" : {
@@ -1013,57 +965,144 @@
             "state" : "translated",
             "value" : "Batería baja:"
           }
-        }
-      }
-    },
-    "settings.unsaved.label" : {
-      "comment" : "Label in Settings for the force-quit unsaved data toggle.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unsaved data:"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nicht gespeicherte Daten:"
-          }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Données non enregistrées :"
+            "value" : "Batterie faible :"
+          }
+        }
+      }
+    },
+    "settings.battery.off" : {
+      "comment" : "Battery off",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aus"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Off"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Datos sin guardar:"
+            "value" : "Apagado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désactivé"
+          }
+        }
+      }
+    },
+    "settings.focus.diagnostic" : {
+      "comment" : "Diagnostic label",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diagnose:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diagnostic:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diagnóstico:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diagnostic :"
+          }
+        }
+      }
+    },
+    "settings.focus.fda.button" : {
+      "comment" : "Open FDA settings",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir"
+          }
+        }
+      }
+    },
+    "settings.focus.fda.error" : {
+      "comment" : "Full Disk Access error for Focus mirror",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush kann deinen Fokus-Status nicht lesen. Gewähre Vollzugriff auf die Festplatte in den Systemeinstellungen, dann Hush in der FDA-Liste erneut einschalten nach dem erneuten Bereitstellen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush can't read your Focus state. Grant Full Disk Access in System Settings, then re-toggle Hush in the FDA list after redeploying."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush no puede leer tu estado Focus. Concede Acceso completo al disco en Ajustes del Sistema, luego vuelve a activar Hush en la lista FDA después de volver a desplegar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush ne peut pas lire votre état Focus. Accordez l'accès complet au disque dans les Réglages Système, puis réactivez Hush dans la liste FDA après redéploiement."
           }
         }
       }
     },
     "settings.focus.label" : {
-      "comment" : "Label in Settings for the macOS Focus mirroring section.",
+      "comment" : "Settings row label",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "macOS Focus:"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "macOS-Fokus:"
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Focus macOS :"
+            "value" : "macOS Focus:"
           }
         },
         "es" : {
@@ -1071,60 +1110,182 @@
             "state" : "translated",
             "value" : "Focus de macOS:"
           }
-        }
-      }
-    },
-    "settings.window.title" : {
-      "comment" : "Title of the Settings window.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Einstellungen"
-          }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Réglages"
+            "value" : "Focus macOS :"
+          }
+        }
+      }
+    },
+    "settings.focus.mirror.desc" : {
+      "comment" : "Focus mirror description",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erkennt Nicht stören, Unterbrechungen reduzieren, Arbeit und alle benutzerdefinierten Fokus-Modi."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detects Do Not Disturb, Reduce Interruptions, Work, and any custom Focus mode."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajustes"
+            "value" : "Detecta No molestar, Reducir interrupciones, Trabajo y cualquier modo Focus personalizado."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Détecte Ne pas déranger, Réduire les interruptions, Travail et tout mode Focus personnalisé."
+          }
+        }
+      }
+    },
+    "settings.focus.mode.on.badge" : {
+      "comment" : "Active mode badge",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "an"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "on"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "activo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "activé"
+          }
+        }
+      }
+    },
+    "settings.focus.no.modes" : {
+      "comment" : "No Focus modes message",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch keine Fokus-Modi auf diesem Mac konfiguriert."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Focus modes configured on this Mac yet."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no hay modos Focus configurados en este Mac."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun mode Focus configuré sur ce Mac pour le moment."
+          }
+        }
+      }
+    },
+    "settings.focus.trigger.desc" : {
+      "comment" : "Focus trigger intro",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush auslösen, wenn einer dieser Modi aktiviert ist:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trigger Hush when any of these are on:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar Hush cuando uno de estos esté encendido:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déclencher Hush quand l'un de ceux-ci est actif :"
+          }
+        }
+      }
+    },
+    "settings.forcequit.explanation" : {
+      "comment" : "Force quit explanation",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eskaliert auch nach ~4 Sekunden zu SIGKILL bei hängenden Apps (z.B. Microsoft Office)."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Also escalates to SIGKILL after ~4 s for stuck apps (e.g. Microsoft Office)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "También escala a SIGKILL tras ~4 s para apps atascadas (ej. Microsoft Office)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passe aussi en SIGKILL après ~4 s pour les apps bloquées (ex. Microsoft Office)."
           }
         }
       }
     },
     "settings.header.appname" : {
-      "comment" : "App name in the Settings header (brand, consider keeping English).",
+      "comment" : "App name in header",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hush"
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hush"
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hush"
           }
         },
         "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush"
+          }
+        },
+        "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hush"
@@ -1133,21 +1294,15 @@
       }
     },
     "settings.header.slogan" : {
-      "comment" : "Slogan in Settings header (brand voice).",
+      "comment" : "Slogan in header",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hush the noise. Reclaim your focus."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hush the noise. Reclaim your focus."
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hush the noise. Reclaim your focus."
@@ -1158,550 +1313,231 @@
             "state" : "translated",
             "value" : "Hush the noise. Reclaim your focus."
           }
-        }
-      }
-    },
-    "settings.version.help" : {
-      "comment" : "Tooltip explaining the version + git hash in Settings.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Build identifier, short git commit hash."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Build-Kennung, kurzer Git-Commit-Hash."
-          }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Identifiant de build, court hash de commit git."
+            "value" : "Hush the noise. Reclaim your focus."
+          }
+        }
+      }
+    },
+    "settings.idle.hours" : {
+      "comment" : "Short duration for the idle time picker (exact hours).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Std."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%dh"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Identificador de build, hash corto de commit git."
-          }
-        }
-      }
-    },
-    "settings.focus.mirror.desc" : {
-      "comment" : "Description when macOS Focus mirror is off.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Detects Do Not Disturb, Reduce Interruptions, Work, and any custom Focus mode."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erkennt Nicht stören, Unterbrechungen reduzieren, Arbeit und alle benutzerdefinierten Fokus-Modi."
+            "value" : "%d h"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Détecte Ne pas déranger, Réduire les interruptions, Travail et tout mode Focus personnalisé."
+            "value" : "%d h"
+          }
+        }
+      }
+    },
+    "settings.idle.hoursAndMinutes" : {
+      "comment" : "Mixed duration for the idle time picker (e.g. 1h 30m).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Std. %d Min"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%dh %dmin"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Detecta No molestar, Reducir interrupciones, Trabajo y cualquier modo Focus personalizado."
-          }
-        }
-      }
-    },
-    "settings.focus.fda.error" : {
-      "comment" : "Error message when Full Disk Access is missing for Focus mirror.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hush can't read your Focus state. Grant Full Disk Access in System Settings, then re-toggle Hush in the FDA list after redeploying."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hush kann deinen Fokus-Status nicht lesen. Gewähre Vollzugriff auf die Festplatte in den Systemeinstellungen, dann Hush in der FDA-Liste erneut einschalten nach dem erneuten Bereitstellen."
+            "value" : "%d h %d min"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hush ne peut pas lire votre état Focus. Accordez l'accès complet au disque dans les Réglages Système, puis réactivez Hush dans la liste FDA après redéploiement."
+            "value" : "%d h %d min"
+          }
+        }
+      }
+    },
+    "settings.idle.label" : {
+      "comment" : "Settings row label",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leerlaufzeit:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idle time:"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hush no puede leer tu estado Focus. Concede Acceso completo al disco en Ajustes del Sistema, luego vuelve a activar Hush en la lista FDA después de volver a desplegar."
-          }
-        }
-      }
-    },
-    "settings.focus.fda.button" : {
-      "comment" : "Button to open Full Disk Access settings.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Öffnen"
+            "value" : "Tiempo de inactividad:"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrir"
+            "value" : "Temps d'inactivité :"
+          }
+        }
+      }
+    },
+    "settings.idle.minutes" : {
+      "comment" : "Short duration for the idle time picker (under 1 hour).",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Min"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%dm"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abrir"
-          }
-        }
-      }
-    },
-    "settings.focus.diagnostic" : {
-      "comment" : "Prefix for Focus mirror diagnostic error.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diagnostic:"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Diagnose:"
+            "value" : "%d min"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Diagnostic :"
+            "value" : "%d min"
+          }
+        }
+      }
+    },
+    "settings.quitbutton.label" : {
+      "comment" : "Settings row label",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beenden-Schaltfläche:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quit button:"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Diagnóstico:"
-          }
-        }
-      }
-    },
-    "settings.focus.no.modes" : {
-      "comment" : "Message when no macOS Focus modes are configured.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Focus modes configured on this Mac yet."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Noch keine Fokus-Modi auf diesem Mac konfiguriert."
+            "value" : "Botón Salir:"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aucun mode Focus configuré sur ce Mac pour le moment."
+            "value" : "Bouton Quitter :"
+          }
+        }
+      }
+    },
+    "settings.sleep.label" : {
+      "comment" : "Settings row label",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beim Schlaf:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On sleep:"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aún no hay modos Focus configurados en este Mac."
-          }
-        }
-      }
-    },
-    "settings.focus.trigger.desc" : {
-      "comment" : "Intro text above the list of Focus modes to trigger on.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trigger Hush when any of these are on:"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hush auslösen, wenn einer dieser Modi aktiviert ist:"
+            "value" : "Al dormir:"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Déclencher Hush quand l'un de ceux-ci est actif :"
+            "value" : "En veille :"
+          }
+        }
+      }
+    },
+    "settings.startup.label" : {
+      "comment" : "Settings row label",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Startup:"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activar Hush cuando uno de estos esté encendido:"
-          }
-        }
-      }
-    },
-    "settings.focus.mode.on.badge" : {
-      "comment" : "Small badge shown next to an active macOS Focus mode.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "on"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "an"
+            "value" : "Inicio:"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "activé"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "activo"
-          }
-        }
-      }
-    },
-    "settings.until.quitting" : {
-      "comment" : "Text after the idle time picker.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "until quitting"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "bis zum Beenden"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "jusqu'à la fermeture"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "hasta salir"
-          }
-        }
-      }
-    },
-    "settings.toggle.show.close" : {
-      "comment" : "Toggle title for showing manual close button per app.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show a button to quit apps manually"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schaltfläche zum manuellen Beenden von Apps anzeigen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher un bouton pour quitter manuellement les apps"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar un botón para salir manualmente de las apps"
-          }
-        }
-      }
-    },
-    "settings.toggle.autocheck" : {
-      "comment" : "Toggle title for automatically checking new apps.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Automatically check newly opened apps"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Neu geöffnete Apps automatisch prüfen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vérifier automatiquement les apps nouvellement ouvertes"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Comprobar automáticamente las apps recién abiertas"
-          }
-        }
-      }
-    },
-    "settings.toggle.sleep" : {
-      "comment" : "Toggle title for quitting on display sleep.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quit checked apps when the display sleeps"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Geprüfte Apps beenden, wenn der Bildschirm schläft"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quitter les apps cochées quand l'écran passe en veille"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Salir de las apps marcadas cuando la pantalla duerme"
-          }
-        }
-      }
-    },
-    "settings.battery.off" : {
-      "comment" : "Option in battery picker for disabled.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Off"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aus"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Désactivé"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apagado"
-          }
-        }
-      }
-    },
-    "settings.battery.ignore" : {
-      "comment" : "Description when battery awareness is off.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ignore battery level"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Akku-Stand ignorieren"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ignorer le niveau de batterie"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ignorar nivel de batería"
-          }
-        }
-      }
-    },
-    "settings.battery.halve" : {
-      "comment" : "Description for battery threshold.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "halve idle time when below this on battery"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Leerlaufzeit halbieren, wenn Akku darunter ist"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "réduire de moitié le temps d'inactivité si en dessous sur batterie"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "reducir a la mitad el tiempo de inactividad si está por debajo con batería"
-          }
-        }
-      }
-    },
-    "settings.toggle.forcequit" : {
-      "comment" : "Toggle title for force-quitting unsaved data.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Force-quit even apps with unsaved changes (may lose data)"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auch Apps mit nicht gespeicherten Änderungen zwangsbeenden (Datenverlust möglich)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Forcer la fermeture même des apps avec modifications non enregistrées (risque de perte de données)"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Forzar cierre incluso de apps con cambios sin guardar (puede perder datos)"
-          }
-        }
-      }
-    },
-    "settings.forcequit.explanation" : {
-      "comment" : "Explanation text under the force-quit toggle.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Also escalates to SIGKILL after ~4 s for stuck apps (e.g. Microsoft Office)."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eskaliert auch nach ~4 Sekunden zu SIGKILL bei hängenden Apps (z.B. Microsoft Office)."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Passe aussi en SIGKILL après ~4 s pour les apps bloquées (ex. Microsoft Office)."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "También escala a SIGKILL tras ~4 s para apps atascadas (ej. Microsoft Office)."
-          }
-        }
-      }
-    },
-    "settings.toggle.mirror" : {
-      "comment" : "Toggle title for mirroring macOS Focus.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start a Hush focus session when a Mac Focus mode turns on"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eine Hush-Fokus-Sitzung starten, wenn ein macOS-Fokus-Modus aktiviert wird"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Démarrer une session Focus Hush quand un mode Focus Mac est activé"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Iniciar una sesión Focus de Hush cuando se active un modo Focus de Mac"
+            "value" : "Démarrage :"
           }
         }
       }
     },
     "settings.tip.built" : {
-      "comment" : "Tip jar line 1 (brand voice).",
+      "comment" : "Tip jar built solo",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Built solo."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Allein entwickelt."
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Développé seul."
+            "value" : "Built solo."
           }
         },
         "es" : {
@@ -1709,28 +1545,28 @@
             "state" : "translated",
             "value" : "Desarrollado solo."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Développé seul."
+          }
         }
       }
     },
     "settings.tip.coffee" : {
-      "comment" : "Tip jar link text.",
+      "comment" : "Buy coffee link",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Buy me a coffee."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kauf mir einen Kaffee."
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Offrez-moi un café."
+            "value" : "Buy me a coffee."
           }
         },
         "es" : {
@@ -1738,28 +1574,28 @@
             "state" : "translated",
             "value" : "Invítame a un café."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Offrez-moi un café."
+          }
         }
       }
     },
     "settings.tip.help" : {
-      "comment" : "Long help text for the tip jar row.",
+      "comment" : "Tip jar help text",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hush is free and ad-hoc signed by a single developer. If it earned a place in your menu bar, a coffee is appreciated."
-          }
-        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hush ist kostenlos und wird von einem einzelnen Entwickler ad-hoc signiert. Wenn es einen Platz in deiner Menüleiste verdient hat, freue ich mich über einen Kaffee."
           }
         },
-        "fr" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hush est gratuit et signé ad-hoc par un seul développeur. S'il a gagné sa place dans votre barre des menus, un café est apprécié."
+            "value" : "Hush is free and ad-hoc signed by a single developer. If it earned a place in your menu bar, a coffee is appreciated."
           }
         },
         "es" : {
@@ -1767,150 +1603,388 @@
             "state" : "translated",
             "value" : "Hush es gratis y firmado ad-hoc por un solo desarrollador. Si ha ganado un lugar en tu barra de menús, se agradece un café."
           }
-        }
-      }
-    },
-    "approw.unknown" : {
-      "comment" : "Fallback name when an app has no localized name.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unknown"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unbekannt"
-          }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inconnu"
+            "value" : "Hush est gratuit et signé ad-hoc par un seul développeur. S'il a gagné sa place dans votre barre des menus, un café est apprécié."
+          }
+        }
+      }
+    },
+    "settings.toggle.autocheck" : {
+      "comment" : "Auto check toggle",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neu geöffnete Apps automatisch prüfen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatically check newly opened apps"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Desconocido"
-          }
-        }
-      }
-    },
-    "focus.minute.session" : {
-      "comment" : "Part of accessibility label: 'X minute Focus session'.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "minute Focus session"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Minuten-Fokus-Sitzung"
+            "value" : "Comprobar automáticamente las apps recién abiertas"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "min de session Focus"
+            "value" : "Vérifier automatiquement les apps nouvellement ouvertes"
+          }
+        }
+      }
+    },
+    "settings.toggle.forcequit" : {
+      "comment" : "Force quit toggle",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auch Apps mit nicht gespeicherten Änderungen zwangsbeenden (Datenverlust möglich)"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Force-quit even apps with unsaved changes (may lose data)"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "min de sesión Focus"
-          }
-        }
-      }
-    },
-    "focus.starts.this" : {
-      "comment" : "Part of button help text.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "starts this duration"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "startet diese Dauer"
+            "value" : "Forzar cierre incluso de apps con cambios sin guardar (puede perder datos)"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "démarre cette durée"
+            "value" : "Forcer la fermeture même des apps avec modifications non enregistrées (risque de perte de données)"
+          }
+        }
+      }
+    },
+    "settings.toggle.launchatlogin" : {
+      "comment" : "Label inside the Launch at Login toggle",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beim Anmelden starten"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Launch at login"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "inicia esta duración"
-          }
-        }
-      }
-    },
-    "privacy.focusstatus" : {
-      "comment" : "Privacy description shown by macOS when requesting Focus status access (for mirroring).",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hush mirrors your active macOS Focus modes so it can start a Hush focus session automatically."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hush spiegelt deine aktiven macOS-Fokus-Modi, damit es automatisch eine Hush-Fokus-Sitzung starten kann."
+            "value" : "Abrir al iniciar sesión"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hush reflète vos modes Focus macOS actifs pour pouvoir démarrer automatiquement une session Focus Hush."
+            "value" : "Ouvrir à la connexion"
+          }
+        }
+      }
+    },
+    "settings.toggle.mirror" : {
+      "comment" : "Mirror macOS Focus toggle",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eine Hush-Fokus-Sitzung starten, wenn ein macOS-Fokus-Modus aktiviert wird"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start a Hush focus session when a Mac Focus mode turns on"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hush refleja tus modos Focus de macOS activos para poder iniciar automáticamente una sesión Focus de Hush."
-          }
-        }
-      }
-    },
-    "privacy.appleevents" : {
-      "comment" : "Privacy description for Apple Events / scripting to quit apps.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Needed to close apps"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zum Schließen von Apps benötigt"
+            "value" : "Iniciar una sesión Focus de Hush cuando se active un modo Focus de Mac"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nécessaire pour fermer des apps"
+            "value" : "Démarrer une session Focus Hush quand un mode Focus Mac est activé"
+          }
+        }
+      }
+    },
+    "settings.toggle.show.close" : {
+      "comment" : "Show close button toggle",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schaltfläche zum manuellen Beenden von Apps anzeigen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show a button to quit apps manually"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Necesario para cerrar apps"
+            "value" : "Mostrar un botón para salir manualmente de las apps"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher un bouton pour quitter manuellement les apps"
+          }
+        }
+      }
+    },
+    "settings.toggle.sleep" : {
+      "comment" : "Sleep quit toggle",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geprüfte Apps beenden, wenn der Bildschirm schläft"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quit checked apps when the display sleeps"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salir de las apps marcadas cuando la pantalla duerme"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitter les apps cochées quand l'écran passe en veille"
+          }
+        }
+      }
+    },
+    "settings.unsaved.label" : {
+      "comment" : "Settings row label",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht gespeicherte Daten:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unsaved data:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datos sin guardar:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Données non enregistrées :"
+          }
+        }
+      }
+    },
+    "settings.until.quitting" : {
+      "comment" : "After idle picker",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bis zum Beenden"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "until quitting"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "hasta salir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "jusqu'à la fermeture"
+          }
+        }
+      }
+    },
+    "settings.version.help" : {
+      "comment" : "Version tooltip",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Build-Kennung, kurzer Git-Commit-Hash."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Build identifier, short git commit hash."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identificador de build, hash corto de commit git."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identifiant de build, court hash de commit git."
+          }
+        }
+      }
+    },
+    "settings.window.title" : {
+      "comment" : "Settings window title",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réglages"
+          }
+        }
+      }
+    },
+    "timer.hours.left" : {
+      "comment" : "Hours left format",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Std. übrig"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%dh left"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d h restantes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d h restantes"
+          }
+        }
+      }
+    },
+    "timer.minutes.left" : {
+      "comment" : "Minutes left format",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Min übrig"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%dm left"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d min restantes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d min restantes"
+          }
+        }
+      }
+    },
+    "timer.seconds.left" : {
+      "comment" : "Seconds left format",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Sek. übrig"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%ds left"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d s restantes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d s restantes"
           }
         }
       }
