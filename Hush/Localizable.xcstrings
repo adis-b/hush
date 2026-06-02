@@ -9,6 +9,12 @@
             "state" : "translated",
             "value" : "Select All"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle auswählen"
+          }
         }
       }
     },
@@ -19,6 +25,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Settings"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
           }
         }
       }
@@ -31,6 +43,12 @@
             "state" : "translated",
             "value" : "Quit Hush"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush beenden"
+          }
         }
       }
     },
@@ -41,6 +59,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "exempt"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ausgenommen"
           }
         }
       }
@@ -53,6 +77,12 @@
             "state" : "translated",
             "value" : "Opened during this focus session, Hush won't quit it."
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Während dieser Fokus-Sitzung geöffnet, Hush wird es nicht beenden."
+          }
         }
       }
     },
@@ -64,6 +94,12 @@
             "state" : "translated",
             "value" : "Focus"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fokus"
+          }
         }
       }
     },
@@ -71,6 +107,12 @@
       "comment" : "Keyboard shortcut hint shown next to the Focus label (Command-Option-H).",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥⌘H"
+          }
+        },
+        "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "⌥⌘H"
@@ -86,6 +128,12 @@
             "state" : "translated",
             "value" : "Pomodoro"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomodoro"
+          }
         }
       }
     },
@@ -93,6 +141,12 @@
       "comment" : "Short label on the 50-minute focus button.",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deep Work"
+          }
+        },
+        "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deep Work"
@@ -108,6 +162,12 @@
             "state" : "translated",
             "value" : "Ultradian"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultradian"
+          }
         }
       }
     },
@@ -118,6 +178,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "25 min · one Pomodoro (Cirillo, 1987). After it ends, take a 5-min break."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "25 Min · ein Pomodoro (Cirillo, 1987). Danach 5 Min Pause."
           }
         }
       }
@@ -130,6 +196,12 @@
             "state" : "translated",
             "value" : "50 min · two pomodoros, a Deep Work block."
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "50 Min · zwei Pomodori, ein Deep-Work-Block."
+          }
         }
       }
     },
@@ -140,6 +212,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "90 min · one ultradian alertness cycle (Kleitman's basic rest-activity cycle)."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "90 Min · ein ultradianer Wachsamkeitszyklus (Kleitmans grundlegender Ruhe-Aktivitäts-Zyklus)."
           }
         }
       }
@@ -152,6 +230,12 @@
             "state" : "translated",
             "value" : "Start a %d-minute focus session"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eine %d-minütige Fokus-Sitzung starten"
+          }
         }
       }
     },
@@ -162,6 +246,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stop"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stopp"
           }
         }
       }
@@ -174,6 +264,12 @@
             "state" : "translated",
             "value" : "Focus  %d m"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fokus %d Min"
+          }
         }
       }
     },
@@ -184,6 +280,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "⌥⌘H toggles the focus session"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥⌘H schaltet die Fokus-Sitzung um"
           }
         }
       }
@@ -196,6 +298,12 @@
             "state" : "translated",
             "value" : "⌥⌘H · Stop focus session"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "⌥⌘H · Fokus-Sitzung stoppen"
+          }
         }
       }
     },
@@ -206,6 +314,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%dh left"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Std. übrig"
           }
         }
       }
@@ -218,6 +332,12 @@
             "state" : "translated",
             "value" : "%dm left"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Min übrig"
+          }
         }
       }
     },
@@ -228,6 +348,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%ds left"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Sek. übrig"
           }
         }
       }
@@ -240,6 +366,12 @@
             "state" : "translated",
             "value" : "%dm"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Min"
+          }
         }
       }
     },
@@ -250,6 +382,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%dh"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Std."
           }
         }
       }
@@ -262,6 +400,12 @@
             "state" : "translated",
             "value" : "%dh %dmin"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Std. %d Min"
+          }
         }
       }
     },
@@ -269,6 +413,12 @@
       "comment" : "RAM usage display in gigabytes. Used in tooltip.",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.1f GB RAM"
+          }
+        },
+        "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%.1f GB RAM"
@@ -284,6 +434,12 @@
             "state" : "translated",
             "value" : "%.0f MB RAM"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%.0f MB RAM"
+          }
         }
       }
     },
@@ -294,6 +450,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Focus session complete"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fokus-Sitzung abgeschlossen"
           }
         }
       }
@@ -306,6 +468,12 @@
             "state" : "translated",
             "value" : "One Pomodoro down. Take a 5-min break before the next."
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein Pomodoro geschafft. Mach eine 5-Min-Pause vor dem nächsten."
+          }
         }
       }
     },
@@ -316,6 +484,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your Mac is a little quieter."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dein Mac ist etwas ruhiger."
           }
         }
       }
@@ -328,6 +502,12 @@
             "state" : "translated",
             "value" : "Startup:"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start:"
+          }
         }
       }
     },
@@ -338,6 +518,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Idle time:"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leerlaufzeit:"
           }
         }
       }
@@ -350,6 +536,12 @@
             "state" : "translated",
             "value" : "Quit button:"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beenden-Schaltfläche:"
+          }
         }
       }
     },
@@ -360,6 +552,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Auto-check:"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatisch prüfen:"
           }
         }
       }
@@ -372,6 +570,12 @@
             "state" : "translated",
             "value" : "On sleep:"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beim Schlaf:"
+          }
         }
       }
     },
@@ -382,6 +586,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Low battery:"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niedriger Akku:"
           }
         }
       }
@@ -394,6 +604,12 @@
             "state" : "translated",
             "value" : "Unsaved data:"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nicht gespeicherte Daten:"
+          }
         }
       }
     },
@@ -404,6 +620,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "macOS Focus:"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS-Fokus:"
           }
         }
       }
@@ -416,6 +638,12 @@
             "state" : "translated",
             "value" : "Settings"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen"
+          }
         }
       }
     },
@@ -423,6 +651,12 @@
       "comment" : "App name in the Settings header (brand, consider keeping English).",
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush"
+          }
+        },
+        "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hush"
@@ -438,6 +672,12 @@
             "state" : "translated",
             "value" : "Hush the noise. Reclaim your focus."
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush the noise. Reclaim your focus."
+          }
         }
       }
     },
@@ -448,6 +688,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Build identifier, short git commit hash."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Build-Kennung, kurzer Git-Commit-Hash."
           }
         }
       }
@@ -460,6 +706,12 @@
             "state" : "translated",
             "value" : "Detects Do Not Disturb, Reduce Interruptions, Work, and any custom Focus mode."
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erkennt Nicht stören, Unterbrechungen reduzieren, Arbeit und alle benutzerdefinierten Fokus-Modi."
+          }
         }
       }
     },
@@ -470,6 +722,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hush can't read your Focus state. Grant Full Disk Access in System Settings, then re-toggle Hush in the FDA list after redeploying."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush kann deinen Fokus-Status nicht lesen. Gewähre Vollzugriff auf die Festplatte in den Systemeinstellungen, dann Hush in der FDA-Liste erneut einschalten nach dem erneuten Bereitstellen."
           }
         }
       }
@@ -482,6 +740,12 @@
             "state" : "translated",
             "value" : "Open"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnen"
+          }
         }
       }
     },
@@ -492,6 +756,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Diagnostic:"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diagnose:"
           }
         }
       }
@@ -504,6 +774,12 @@
             "state" : "translated",
             "value" : "No Focus modes configured on this Mac yet."
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noch keine Fokus-Modi auf diesem Mac konfiguriert."
+          }
         }
       }
     },
@@ -514,6 +790,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trigger Hush when any of these are on:"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush auslösen, wenn einer dieser Modi aktiviert ist:"
           }
         }
       }
@@ -526,6 +808,12 @@
             "state" : "translated",
             "value" : "on"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "an"
+          }
         }
       }
     },
@@ -536,6 +824,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "until quitting"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bis zum Beenden"
           }
         }
       }
@@ -548,6 +842,12 @@
             "state" : "translated",
             "value" : "Show a button to quit apps manually"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schaltfläche zum manuellen Beenden von Apps anzeigen"
+          }
         }
       }
     },
@@ -558,6 +858,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automatically check newly opened apps"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neu geöffnete Apps automatisch prüfen"
           }
         }
       }
@@ -570,6 +876,12 @@
             "state" : "translated",
             "value" : "Quit checked apps when the display sleeps"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geprüfte Apps beenden, wenn der Bildschirm schläft"
+          }
         }
       }
     },
@@ -580,6 +892,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Off"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aus"
           }
         }
       }
@@ -592,6 +910,12 @@
             "state" : "translated",
             "value" : "ignore battery level"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Akku-Stand ignorieren"
+          }
         }
       }
     },
@@ -602,6 +926,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "halve idle time when below this on battery"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leerlaufzeit halbieren, wenn Akku darunter ist"
           }
         }
       }
@@ -614,6 +944,12 @@
             "state" : "translated",
             "value" : "Force-quit even apps with unsaved changes (may lose data)"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auch Apps mit nicht gespeicherten Änderungen zwangsbeenden (Datenverlust möglich)"
+          }
         }
       }
     },
@@ -624,6 +960,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Also escalates to SIGKILL after ~4 s for stuck apps (e.g. Microsoft Office)."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eskaliert auch nach ~4 Sekunden zu SIGKILL bei hängenden Apps (z.B. Microsoft Office)."
           }
         }
       }
@@ -636,6 +978,12 @@
             "state" : "translated",
             "value" : "Start a Hush focus session when a Mac Focus mode turns on"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eine Hush-Fokus-Sitzung starten, wenn ein macOS-Fokus-Modus aktiviert wird"
+          }
         }
       }
     },
@@ -646,6 +994,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Built solo."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allein entwickelt."
           }
         }
       }
@@ -658,6 +1012,12 @@
             "state" : "translated",
             "value" : "Buy me a coffee."
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kauf mir einen Kaffee."
+          }
         }
       }
     },
@@ -668,6 +1028,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hush is free and ad-hoc signed by a single developer. If it earned a place in your menu bar, a coffee is appreciated."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush ist kostenlos und wird von einem einzelnen Entwickler ad-hoc signiert. Wenn es einen Platz in deiner Menüleiste verdient hat, freue ich mich über einen Kaffee."
           }
         }
       }
@@ -680,6 +1046,12 @@
             "state" : "translated",
             "value" : "Unknown"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unbekannt"
+          }
         }
       }
     },
@@ -690,6 +1062,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "minute Focus session"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minuten-Fokus-Sitzung"
           }
         }
       }
@@ -702,6 +1080,12 @@
             "state" : "translated",
             "value" : "starts this duration"
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "startet diese Dauer"
+          }
         }
       }
     },
@@ -713,6 +1097,12 @@
             "state" : "translated",
             "value" : "Hush mirrors your active macOS Focus modes so it can start a Hush focus session automatically."
           }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush spiegelt deine aktiven macOS-Fokus-Modi, damit es automatisch eine Hush-Fokus-Sitzung starten kann."
+          }
         }
       }
     },
@@ -723,6 +1113,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Needed to close apps"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zum Schließen von Apps benötigt"
           }
         }
       }
