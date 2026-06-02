@@ -14,6 +14,18 @@ let runningAppsManager = RunningAppsManager()
 struct HushApp: App {
     @ObservedObject private var manager = runningAppsManager
 
+    init() {
+        // Normalize AppleLanguages to bare two-letter ISO 639 codes (e.g. "en" instead of "en-US").
+        // This prevents system frameworks like GenerativeModelsAvailability from logging
+        // "Initialized with invalid language code: en-US" (and similar for other regions).
+        // The launch args in the Xcode schemes do the same for debug runs; this makes it
+        // robust even for direct launches and for all localized languages we support.
+        if let languages = UserDefaults.standard.array(forKey: "AppleLanguages") as? [String] {
+            let normalized = languages.map { $0.components(separatedBy: "-").first ?? $0 }
+            UserDefaults.standard.set(normalized, forKey: "AppleLanguages")
+        }
+    }
+
     var body: some Scene {
         MenuBarExtra {
             ContentView(manager: manager)
