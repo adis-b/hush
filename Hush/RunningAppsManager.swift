@@ -64,6 +64,7 @@ class RunningAppsManager: ObservableObject {
     @Published var availableFocusModes: [FocusMode] = []
     @Published var focusFilesReadable: Bool = false
     @Published var focusReadError: String = ""
+    @Published var focusModesParseNote: String = ""
 
     @AppStorage("minutesUntilClose") var minutesUntilClose: Int = 120
     @AppStorage("com.MagicQuit.toggleStatus") var toggleStatusData: Data = Data()
@@ -109,6 +110,17 @@ class RunningAppsManager: ObservableObject {
 
         focusMirror = FocusMirror { [weak self] in self?.refreshFocusState() }
         refreshFocusState()
+
+        // user often grants FDA in System Settings then returns here
+        NotificationCenter.default.addObserver(
+            forName: NSApplication.didBecomeActiveNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.focusMirror?.ensureWatching(force: true)
+            self.refreshFocusState()
+        }
 
         let workspaceCenter = NSWorkspace.shared.notificationCenter
         workspaceCenter.addObserver(forName: NSWorkspace.didDeactivateApplicationNotification,
@@ -223,18 +235,27 @@ class RunningAppsManager: ObservableObject {
     }
 
     func openFullDiskAccessSettings() {
-        if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles") {
-            NSWorkspace.shared.open(url)
+        let urls = [
+            // macOS 13+ System Settings
+            "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_AllFiles",
+            // Ventura fallback
+            "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles",
+        ]
+        for raw in urls {
+            if let url = URL(string: raw), NSWorkspace.shared.open(url) {
+                return
+            }
         }
     }
 
     private func refreshFocusState() {
         guard let mirror = focusMirror else { return }
-        mirror.ensureWatching() // picks up newly-granted FDA
+        mirror.ensureWatching()
 
-        focusFilesReadable = mirror.isReadable
+        focusFilesReadable = mirror.checkFilesAccessible()
         focusReadError = mirror.lastReadError
         availableFocusModes = mirror.availableModes()
+        focusModesParseNote = mirror.lastModesParseNote
         let nowActive = mirror.activeModeIdentifiers()
         if nowActive != activeFocusModes { activeFocusModes = nowActive }
 
@@ -250,6 +271,11 @@ class RunningAppsManager: ObservableObject {
     }
 
     func reevaluateFocusMirror() { refreshFocusState() }
+
+    func focusMirrorRearmAndRefresh() {
+        focusMirror?.ensureWatching(force: true)
+        refreshFocusState()
+    }
 
     private func effectiveThresholdSeconds() -> Int {
         if focusSessionEndDate != nil {

@@ -84,9 +84,17 @@ struct SettingsView: View {
                     .textSelection(.enabled)
             }
         } else if manager.availableFocusModes.isEmpty {
-            Text("settings.focus.no.modes", comment: "No Focus modes message")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+            VStack(alignment: .leading, spacing: 4) {
+                Text("settings.focus.no.modes", comment: "No Focus modes message")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                if !manager.focusModesParseNote.isEmpty {
+                    Text("\(String(localized: "settings.focus.diagnostic", comment: "Diagnostic label")) \(manager.focusModesParseNote)")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .textSelection(.enabled)
+                }
+            }
         } else {
             VStack(alignment: .leading, spacing: 4) {
                 Text("settings.focus.trigger.desc", comment: "Focus trigger intro")
@@ -260,6 +268,9 @@ struct SettingsView: View {
             }
         }
         .frame(minWidth: 520, minHeight: 480)
+        .onAppear {
+            manager.focusMirrorRearmAndRefresh()
+        }
     }
 }
 
