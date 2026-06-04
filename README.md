@@ -1,6 +1,8 @@
 # Hush
 
-Menu-bar app that closes apps you're not using.
+Menu-bar app that closes / quits idle apps on Mac while you focus.
+
+Hush is a clean macOS menu bar tool that automatically closes apps you've stopped using. Perfect for focus sessions, Pomodoro, or anyone who wants a Mac that stays lean without manual cleanup. Combines idle app quitting with built-in focus timers (25/50/90 min) and macOS Focus mode mirroring.
 
 Fork of [BigBerny/magicquit](https://github.com/BigBerny/magicquit) (after [ccarpiog/magicquit](https://github.com/ccarpiog/magicquit)). Stripped down, redesigned, no telemetry, no accounts, no network calls.
 
