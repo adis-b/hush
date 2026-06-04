@@ -39,6 +39,7 @@ struct SettingsView: View {
     @AppStorage("batteryAwareThresholdPercent") var batteryAwareThresholdPercent: Int = 30
     @AppStorage("forceTerminateUnsaved") var forceTerminateUnsaved: Bool = false
     @AppStorage("mirrorMacFocus") var mirrorMacFocus: Bool = false
+    @AppStorage("logFocusToCalendar") var logFocusToCalendar: Bool = false
 
     private let timeOptions = [15, 30, 45, 60, 90, 120, 240, 480, 720, 1440, 2880, 4320]
     private let batteryOptions = [0, 10, 20, 30, 40, 50] // 0 = off
@@ -61,6 +62,55 @@ struct SettingsView: View {
 
     private var appBuildNumber: String {
         Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
+    }
+
+    @ViewBuilder
+    private var notificationStatusLine: some View {
+        if let issueKey = manager.notificationIssueKey {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(LocalizedStringKey(issueKey))
+                    .font(.caption)
+                    .foregroundStyle(.red)
+                HStack(spacing: 6) {
+                    if manager.notificationNeedsPrompt {
+                        Button(String(localized: "settings.notifications.request",
+                                       comment: "Request notification permission")) {
+                            manager.requestNotificationAccess()
+                        }
+                        .controlSize(.small)
+                    } else {
+                        Button(String(localized: "settings.notifications.open",
+                                       comment: "Open notification settings")) {
+                            manager.openNotificationSettings()
+                        }
+                        .controlSize(.small)
+                    }
+                }
+            }
+        } else {
+            Text("settings.notifications.ok", comment: "Notifications enabled")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    @ViewBuilder
+    private var calendarLogStatusLine: some View {
+        if manager.calendarAccessDenied {
+            HStack(spacing: 6) {
+                Text("settings.calendar.denied", comment: "Calendar write access denied")
+                    .font(.caption)
+                    .foregroundStyle(.red)
+                Button(String(localized: "settings.calendar.open", comment: "Open Calendar privacy settings")) {
+                    manager.openCalendarSettings()
+                }
+                .controlSize(.small)
+            }
+        } else if logFocusToCalendar {
+            Text("settings.calendar.desc", comment: "Calendar log description")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
     }
 
     @ViewBuilder
@@ -244,6 +294,40 @@ struct SettingsView: View {
                             macFocusStatusLine
                         }
                     }
+                    GridRow {
+                        Text("settings.notifications.label", comment: "Notifications row label")
+                            .foregroundStyle(.secondary)
+                        notificationStatusLine
+                    }
+                    GridRow {
+                        Text("settings.calendar.label", comment: "Calendar log row label")
+                            .foregroundStyle(.secondary)
+                        VStack(alignment: .leading, spacing: 6) {
+                            if #available(macOS 14, *) {
+                                Toggle(String(localized: "settings.toggle.calendar", comment: "Log focus sessions to Calendar"),
+                                       isOn: $logFocusToCalendar)
+                                    .onChange(of: logFocusToCalendar) { enabled in
+                                        if enabled {
+                                            manager.requestCalendarAccess { granted in
+                                                if !granted {
+                                                    logFocusToCalendar = false
+                                                }
+                                            }
+                                        } else {
+                                            manager.calendarAccessDenied = false
+                                        }
+                                    }
+                                calendarLogStatusLine
+                            } else {
+                                Toggle(String(localized: "settings.toggle.calendar", comment: "Log focus sessions to Calendar"),
+                                       isOn: .constant(false))
+                                    .disabled(true)
+                                Text("settings.calendar.requires14", comment: "Calendar log macOS 14 requirement")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 12)
@@ -270,6 +354,7 @@ struct SettingsView: View {
         .frame(minWidth: 520, minHeight: 480)
         .onAppear {
             manager.focusMirrorRearmAndRefresh()
+            manager.refreshNotificationStatus()
         }
     }
 }

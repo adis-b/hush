@@ -23,6 +23,8 @@
 		25C001B12B4F8097004700B5 /* FocusSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C001A12B4F8097004700A5 /* FocusSessionView.swift */; };
 		25C001B12B4F8097004700B6 /* AppRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C001A12B4F8097004700A6 /* AppRow.swift */; };
 		25C001B12B4F8097004700B7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C001A12B4F8097004700A7 /* SettingsView.swift */; };
+		25C001B12B4F8097004700B8 /* CalendarLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C001A12B4F8097004700A8 /* CalendarLogger.swift */; };
+		25C001B12B4F8097004700B9 /* NotificationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C001A12B4F8097004700A9 /* NotificationDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		25C001A12B4F8097004700A5 /* FocusSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSessionView.swift; sourceTree = "<group>"; };
 		25C001A12B4F8097004700A6 /* AppRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRow.swift; sourceTree = "<group>"; };
 		25C001A12B4F8097004700A7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		25C001A12B4F8097004700A8 /* CalendarLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarLogger.swift; sourceTree = "<group>"; };
+		25C001A12B4F8097004700A9 /* NotificationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDelegate.swift; sourceTree = "<group>"; };
 		1311E156-FE32-4D72-BBAD-81F78FA6094A /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +123,8 @@
 				2517732C2A4F80970047DDA5 /* ContentView.swift */,
 				25C001A12B4F8097004700A1 /* HushColors.swift */,
 				25C001A12B4F8097004700A2 /* FocusMirror.swift */,
+				25C001A12B4F8097004700A8 /* CalendarLogger.swift */,
+				25C001A12B4F8097004700A9 /* NotificationDelegate.swift */,
 				25C001A12B4F8097004700A3 /* GlobalHotkey.swift */,
 				25C001A12B4F8097004700A4 /* RunningAppsManager.swift */,
 				25C001A12B4F8097004700A5 /* FocusSessionView.swift */,
@@ -301,6 +307,8 @@
 				2517732B2A4F80970047DDA5 /* HushApp.swift in Sources */,
 				25C001B12B4F8097004700B1 /* HushColors.swift in Sources */,
 				25C001B12B4F8097004700B2 /* FocusMirror.swift in Sources */,
+				25C001B12B4F8097004700B8 /* CalendarLogger.swift in Sources */,
+				25C001B12B4F8097004700B9 /* NotificationDelegate.swift in Sources */,
 				25C001B12B4F8097004700B3 /* GlobalHotkey.swift in Sources */,
 				25C001B12B4F8097004700B4 /* RunningAppsManager.swift in Sources */,
 				25C001B12B4F8097004700B5 /* FocusSessionView.swift in Sources */,
@@ -464,7 +472,7 @@
 				CODE_SIGN_ENTITLEMENTS = Hush/Hush.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
-				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_ALLOWED = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"Hush/Preview Content\"";
@@ -501,7 +509,7 @@
 				CODE_SIGN_ENTITLEMENTS = Hush/Hush.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
-				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_ALLOWED = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"Hush/Preview Content\"";

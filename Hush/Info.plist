@@ -4,5 +4,7 @@
 <dict>
     <key>NSFocusStatusUsageDescription</key>
     <string>Hush mirrors your active macOS Focus modes so it can start a Hush focus session automatically.</string>
+    <key>NSCalendarsWriteOnlyAccessUsageDescription</key>
+    <string>Hush adds a private event for each focus session you finish. It can write to your calendar but cannot read it.</string>
 </dict>
 </plist>
