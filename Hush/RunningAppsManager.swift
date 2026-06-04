@@ -84,7 +84,6 @@ class RunningAppsManager: ObservableObject {
     @Published var notificationIssueKey: String?
     // true while macOS will still show the allow/deny sheet (notDetermined)
     @Published private(set) var notificationNeedsPrompt: Bool = false
-    @Published private(set) var notificationUnsignedBuild: Bool = false
 
     private var focusSessionStartDate: Date?
     private var focusSessionAnchorAppName: String?
@@ -264,16 +263,10 @@ class RunningAppsManager: ObservableObject {
     }
 
     func refreshNotificationStatus() {
-        notificationUnsignedBuild = NotificationRegistration.isUnsignedOrInvalid
         UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
             DispatchQueue.main.async {
                 guard let self else { return }
-                self.notificationUnsignedBuild = NotificationRegistration.isUnsignedOrInvalid
                 self.notificationNeedsPrompt = settings.authorizationStatus == .notDetermined
-                if self.notificationUnsignedBuild {
-                    self.notificationIssueKey = "settings.notifications.unsigned"
-                    return
-                }
                 switch settings.authorizationStatus {
                 case .authorized, .provisional, .ephemeral:
                     if settings.alertSetting == .disabled {
@@ -296,12 +289,6 @@ class RunningAppsManager: ObservableObject {
     func requestNotificationAccess() {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
-
-            if NotificationRegistration.isUnsignedOrInvalid {
-                self.refreshNotificationStatus()
-                NotificationRegistration.presentAccessFailureAlert(error: nil, stillNeedsPrompt: true)
-                return
-            }
 
             NotificationRegistration.repairLaunchServices()
 

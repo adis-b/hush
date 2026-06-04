@@ -1757,64 +1757,6 @@
         }
       }
     },
-    "settings.notifications.alert.unsigned.body" : {
-      "comment" : "Alert body when app unsigned",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dieser Build ist nicht signiert. macOS zeigt dann keinen Benachrichtigungs-Dialog. Baue Hush in Xcode neu (Code Signing ist jetzt an) oder teste /Applications/Hush.app."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This build is unsigned. macOS won't show a notification permission dialog. Rebuild Hush in Xcode (code signing is enabled now) or test with /Applications/Hush.app."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Esta compilación no está firmada. macOS no mostrará el diálogo de notificaciones. Recompila Hush en Xcode (firma de código activada) o prueba /Applications/Hush.app."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cette build n'est pas signée. macOS n'affichera pas le dialogue de notifications. Recompile Hush dans Xcode (signature activée) ou teste /Applications/Hush.app."
-          }
-        }
-      }
-    },
-    "settings.notifications.alert.unsigned.title" : {
-      "comment" : "Alert title when app unsigned",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Build nicht signiert"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unsigned build"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compilación sin firmar"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Build non signée"
-          }
-        }
-      }
-    },
     "settings.notifications.alertsOff" : {
       "comment" : "Notifications allowed but banner style is None",
       "extractionState" : "stale",
@@ -2016,36 +1958,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autoriser les notifications"
-          }
-        }
-      }
-    },
-    "settings.notifications.unsigned" : {
-      "comment" : "Settings hint when app bundle is unsigned",
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dieser Build ist nicht signiert; macOS blockiert den Benachrichtigungs-Dialog. Neu bauen in Xcode oder /Applications/Hush.app nutzen."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This build is unsigned, so macOS blocks the notification prompt. Rebuild in Xcode or use /Applications/Hush.app."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Esta compilación no está firmada; macOS bloquea el aviso de permiso. Recompila en Xcode o usa /Applications/Hush.app."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cette build n'est pas signée ; macOS bloque la demande. Recompile dans Xcode ou utilise /Applications/Hush.app."
           }
         }
       }

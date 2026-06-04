@@ -72,14 +72,13 @@ struct SettingsView: View {
                     .font(.caption)
                     .foregroundStyle(.red)
                 HStack(spacing: 6) {
-                    if manager.notificationNeedsPrompt && !manager.notificationUnsignedBuild {
+                    if manager.notificationNeedsPrompt {
                         Button(String(localized: "settings.notifications.request",
                                        comment: "Request notification permission")) {
                             manager.requestNotificationAccess()
                         }
                         .controlSize(.small)
-                    }
-                    if manager.notificationIssueKey != nil && !manager.notificationUnsignedBuild {
+                    } else {
                         Button(String(localized: "settings.notifications.open",
                                        comment: "Open notification settings")) {
                             manager.openNotificationSettings()

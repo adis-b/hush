@@ -1,6 +1,5 @@
 import AppKit
 import Foundation
-import Security
 import UserNotifications
 import os.log
 
@@ -15,32 +14,9 @@ final class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
     }
 }
 
-// macOS ignores notification permission prompts for unsigned bundles.
 enum NotificationRegistration {
     private static let log = OSLog(subsystem: Bundle.main.bundleIdentifier!, category: "NotificationRegistration")
     private static let lsregister = "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
-
-    static var isUnsignedOrInvalid: Bool {
-        let path = Bundle.main.bundleURL.path
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/codesign")
-        process.arguments = ["--verify", "--deep", "--strict", path]
-        do {
-            try process.run()
-            process.waitUntilExit()
-            if process.terminationStatus != 0 {
-                return true
-            }
-        } catch {
-            return true
-        }
-        var code: SecStaticCode?
-        let url = Bundle.main.bundleURL as CFURL
-        guard SecStaticCodeCreateWithPath(url, [], &code) == errSecSuccess, let code else {
-            return true
-        }
-        return SecStaticCodeCheckValidity(code, [], nil) != errSecSuccess
-    }
 
     // lsregister -u/-f fixes stale LaunchServices entries after reinstall (Sonoma+).
     static func repairLaunchServices() {
@@ -66,12 +42,7 @@ enum NotificationRegistration {
     static func presentAccessFailureAlert(error: Error?, stillNeedsPrompt: Bool) {
         let alert = NSAlert()
         alert.alertStyle = .warning
-        if isUnsignedOrInvalid {
-            alert.messageText = String(localized: "settings.notifications.alert.unsigned.title",
-                                       comment: "Alert title when app unsigned")
-            alert.informativeText = String(localized: "settings.notifications.alert.unsigned.body",
-                                          comment: "Alert body when app unsigned")
-        } else if stillNeedsPrompt {
+        if stillNeedsPrompt {
             alert.messageText = String(localized: "settings.notifications.alert.noDialog.title",
                                        comment: "Alert title when prompt did not appear")
             alert.informativeText = String(localized: "settings.notifications.alert.noDialog.body",
