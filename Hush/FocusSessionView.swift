@@ -10,10 +10,18 @@ struct FocusSessionView: View {
 
     @State private var now = Date()
     private let tick = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    // TODO: remove 5 from durations (and the case branches below) after calendar-log QA
+    #if DEBUG
+    private let durations = [5, 25, 50, 90]
+    #else
     private let durations = [25, 50, 90]
+    #endif
 
     private func durationHelp(_ minutes: Int) -> String {
         switch minutes {
+        #if DEBUG
+        case 5: return "5 min, debug only (calendar log smoke test)"
+        #endif
         case 25: return String(localized: "focus.help.pomodoro", comment: "Help for 25 min button")
         case 50: return String(localized: "focus.help.deepwork", comment: "Help for 50 min button")
         case 90: return String(localized: "focus.help.ultradian", comment: "Help for 90 min button")
@@ -40,6 +48,9 @@ struct FocusSessionView: View {
     // small label has to carry the framing
     private func durationLabel(_ minutes: Int) -> String {
         switch minutes {
+        #if DEBUG
+        case 5: return "debug"
+        #endif
         case 25: return String(localized: "focus.duration.pomodoro", comment: "Short label on 25 min button")
         case 50: return String(localized: "focus.duration.deepwork", comment: "Short label on 50 min button")
         case 90: return String(localized: "focus.duration.ultradian", comment: "Short label on 90 min button")

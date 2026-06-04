@@ -75,9 +75,21 @@ class RunningAppsManager: ObservableObject {
     @AppStorage("lastFocusDuration") var lastFocusDuration: Int = 25
     @AppStorage("forceTerminateUnsaved") var forceTerminateUnsaved: Bool = false
     @AppStorage("mirrorMacFocus") var mirrorMacFocus: Bool = false
+    @AppStorage("logFocusToCalendar") var logFocusToCalendar: Bool = false
     // JSON [String] of mode ids the user opted out from
     @AppStorage("excludedFocusModes") var excludedFocusModesData: Data = Data()
 
+    @Published var calendarAccessDenied: Bool = false
+    // nil = alerts OK; non-nil = localized settings key for the issue
+    @Published var notificationIssueKey: String?
+    // true while macOS will still show the allow/deny sheet (notDetermined)
+    @Published private(set) var notificationNeedsPrompt: Bool = false
+    @Published private(set) var notificationUnsignedBuild: Bool = false
+
+    private var focusSessionStartDate: Date?
+    private var focusSessionAnchorAppName: String?
+    private var calendarLogger: Any?
+    private let calendarMinLogSeconds: TimeInterval = 300
     private let focusSessionGracePeriodSeconds = 30
     private let memorySamplingInterval: TimeInterval = 3
     private var lastMemorySample: Date = .distantPast
@@ -120,6 +132,7 @@ class RunningAppsManager: ObservableObject {
             guard let self = self else { return }
             self.focusMirror?.ensureWatching(force: true)
             self.refreshFocusState()
+            self.refreshNotificationStatus()
         }
 
         let workspaceCenter = NSWorkspace.shared.notificationCenter
@@ -150,7 +163,9 @@ class RunningAppsManager: ObservableObject {
             }
         }
 
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, _ in }
+        UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
+        refreshNotificationStatus()
+        // defer prompt to Settings "Allow" or first focus end; init request was easy to miss
 
         // ⌥⌘H toggles focus from anywhere
         self.focusHotkey = GlobalHotkey(keyCode: UInt32(kVK_ANSI_H),
@@ -248,6 +263,137 @@ class RunningAppsManager: ObservableObject {
         }
     }
 
+    func refreshNotificationStatus() {
+        notificationUnsignedBuild = NotificationRegistration.isUnsignedOrInvalid
+        UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
+            DispatchQueue.main.async {
+                guard let self else { return }
+                self.notificationUnsignedBuild = NotificationRegistration.isUnsignedOrInvalid
+                self.notificationNeedsPrompt = settings.authorizationStatus == .notDetermined
+                if self.notificationUnsignedBuild {
+                    self.notificationIssueKey = "settings.notifications.unsigned"
+                    return
+                }
+                switch settings.authorizationStatus {
+                case .authorized, .provisional, .ephemeral:
+                    if settings.alertSetting == .disabled {
+                        self.notificationIssueKey = "settings.notifications.alertsOff"
+                    } else {
+                        self.notificationIssueKey = nil
+                    }
+                case .notDetermined:
+                    self.notificationIssueKey = "settings.notifications.notDetermined"
+                case .denied:
+                    self.notificationIssueKey = "settings.notifications.denied"
+                @unknown default:
+                    self.notificationIssueKey = "settings.notifications.denied"
+                }
+            }
+        }
+    }
+
+    // user gesture: shows the system sheet when still notDetermined; registers Hush in Notifications.
+    func requestNotificationAccess() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+
+            if NotificationRegistration.isUnsignedOrInvalid {
+                self.refreshNotificationStatus()
+                NotificationRegistration.presentAccessFailureAlert(error: nil, stillNeedsPrompt: true)
+                return
+            }
+
+            NotificationRegistration.repairLaunchServices()
+
+            let priorPolicy = NSApp.activationPolicy()
+            if priorPolicy == .accessory {
+                NSApp.setActivationPolicy(.regular)
+            }
+            NSApp.activate(ignoringOtherApps: true)
+            SettingsWindowController.current?.window?.makeKeyAndOrderFront(nil)
+
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+                DispatchQueue.main.async {
+                    if priorPolicy == .accessory {
+                        NSApp.setActivationPolicy(.accessory)
+                    }
+                    if let error {
+                        os_log("notification auth request failed %{public}@",
+                               log: self.log, type: .error, error.localizedDescription)
+                    }
+                    self.refreshNotificationStatus()
+                    if granted {
+                        os_log("notification auth granted", log: self.log, type: .info)
+                        return
+                    }
+                    let stillNeeds = self.notificationNeedsPrompt
+                    if stillNeeds || self.notificationIssueKey == "settings.notifications.denied" {
+                        NotificationRegistration.presentAccessFailureAlert(error: error, stillNeedsPrompt: stillNeeds)
+                    }
+                }
+            }
+        }
+    }
+
+    func openNotificationSettings() {
+        let bundleId = Bundle.main.bundleIdentifier ?? "com.MagicQuit"
+        let urls = [
+            "x-apple.systempreferences:com.apple.Notifications-Settings.extension?id=\(bundleId)",
+            "x-apple.systempreferences:com.apple.preference.notifications?id=\(bundleId)",
+            "x-apple.systempreferences:com.apple.Notifications-Settings.extension",
+            "x-apple.systempreferences:com.apple.preference.notifications",
+        ]
+        for raw in urls {
+            if let url = URL(string: raw), NSWorkspace.shared.open(url) {
+                return
+            }
+        }
+    }
+
+    func openCalendarSettings() {
+        let urls = [
+            "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?Privacy_Calendars",
+            "x-apple.systempreferences:com.apple.preference.security?Privacy_Calendars",
+        ]
+        for raw in urls {
+            if let url = URL(string: raw), NSWorkspace.shared.open(url) {
+                return
+            }
+        }
+    }
+
+    func requestCalendarAccess(completion: ((Bool) -> Void)? = nil) {
+        guard #available(macOS 14, *) else {
+            completion?(false)
+            return
+        }
+        ensureCalendarLogger()
+        guard let logger = calendarLogger as? CalendarLogger else {
+            completion?(false)
+            return
+        }
+        logger.requestAccess { [weak self] granted in
+            self?.calendarAccessDenied = !granted
+            completion?(granted)
+        }
+    }
+
+    private func ensureCalendarLogger() {
+        if #available(macOS 14, *), calendarLogger == nil {
+            calendarLogger = CalendarLogger()
+        }
+    }
+
+    private func anchorName(for app: NSRunningApplication?) -> String? {
+        guard let app,
+              let bundleId = app.bundleIdentifier,
+              bundleId != Bundle.main.bundleIdentifier,
+              bundleId != "com.apple.finder" else {
+            return nil
+        }
+        return app.localizedName
+    }
+
     private func refreshFocusState() {
         guard let mirror = focusMirror else { return }
         mirror.ensureWatching()
@@ -314,6 +460,8 @@ class RunningAppsManager: ObservableObject {
         focusSessionEndDate = Date().addingTimeInterval(Double(minutes * 60))
         focusSessionExemptPIDs = [] // alles offene = fair game
         let frontmost = NSWorkspace.shared.frontmostApplication
+        focusSessionStartDate = Date()
+        focusSessionAnchorAppName = anchorName(for: frontmost)
         for app in runningApps.keys {
             guard !isBlockedApp(app),
                   toggleStatus[app.localizedName ?? ""] ?? false,
@@ -337,19 +485,53 @@ class RunningAppsManager: ObservableObject {
     }
 
     private func endFocusSession(reason: FocusSessionEndReason) {
+        let now = Date()
+        let sessionStart = focusSessionStartDate
+        let anchorApp = focusSessionAnchorAppName
+        let plannedSeconds = Double(lastFocusDuration * 60)
+        let elapsed = sessionStart.map { now.timeIntervalSince($0) } ?? 0
+
+        if logFocusToCalendar, #available(macOS 14, *), let sessionStart,
+           now.timeIntervalSince(sessionStart) >= calendarMinLogSeconds {
+            ensureCalendarLogger()
+            (calendarLogger as? CalendarLogger)?.log(start: sessionStart, end: now, appName: anchorApp)
+        }
+
+        focusSessionStartDate = nil
+        focusSessionAnchorAppName = nil
         focusSessionEndDate = nil
         focusStartedByMacFocus = false
         focusSessionExemptPIDs = []
-        guard reason == .completed else { return }
+
+        // Stop / ⌥⌘H ends as .cancelled; still notify if they were in the last ~90s
+        let shouldNotify = reason == .completed
+            || (reason == .cancelled && elapsed >= plannedSeconds - 90)
+        guard shouldNotify else { return }
+
         let content = UNMutableNotificationContent()
         content.title = String(localized: "notification.focus.complete.title", comment: "Notification title")
         content.body = (lastFocusDuration == 25)
             ? String(localized: "notification.focus.pomodoro.body", comment: "Pomodoro completion message")
             : String(localized: "notification.focus.complete.body", comment: "Generic focus completion message")
-        let request = UNNotificationRequest(identifier: "hush.focus.complete",
-                                            content: content,
-                                            trigger: nil)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+        UNUserNotificationCenter.current().getNotificationSettings { [log] settings in
+            guard settings.authorizationStatus == .authorized,
+                  settings.alertSetting == .enabled else {
+                os_log("notification skipped: auth=%{public}d alert=%{public}d",
+                       log: log, type: .info,
+                       settings.authorizationStatus.rawValue,
+                       settings.alertSetting.rawValue)
+                return
+            }
+            let request = UNNotificationRequest(identifier: "hush.focus.complete.\(now.timeIntervalSince1970)",
+                                                content: content,
+                                                trigger: nil)
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error {
+                    os_log("notification add failed %{public}@",
+                           log: log, type: .error, error.localizedDescription)
+                }
+            }
+        }
     }
 
     private func refreshMemoryUsage() {

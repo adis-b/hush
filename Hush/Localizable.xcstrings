@@ -131,6 +131,93 @@
         }
       }
     },
+    "calendar.event.notes" : {
+      "comment" : "Calendar event notes body",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Von Hush protokolliert."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logged by Hush."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registrado por Hush."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistré par Hush."
+          }
+        }
+      }
+    },
+    "calendar.event.title.noApp" : {
+      "comment" : "Calendar event title without app; %1 duration",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush · %1$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush · %1$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush · %1$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush · %1$@"
+          }
+        }
+      }
+    },
+    "calendar.event.title.withApp" : {
+      "comment" : "Calendar event title with app; %1 duration, %2 app",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush · %1$@ · %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush · %1$@ · %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush · %1$@ · %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush · %1$@ · %2$@"
+          }
+        }
+      }
+    },
     "content.menu.quit" : {
       "comment" : "Quits the Hush app itself",
       "localizations" : {
@@ -1003,6 +1090,151 @@
         }
       }
     },
+    "settings.calendar.denied" : {
+      "comment" : "Calendar write access denied",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush kann nicht in deinen Kalender schreiben. Erteile den Zugriff in den Systemeinstellungen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush can't write to your calendar. Grant access in System Settings."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush no puede escribir en tu calendario. Concede el acceso en Ajustes del Sistema."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush ne peut pas écrire dans ton calendrier. Accorde l'accès dans Réglages Système."
+          }
+        }
+      }
+    },
+    "settings.calendar.desc" : {
+      "comment" : "Calendar log description",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legt nach jeder Fokus-Sitzung ein privates Ereignis wie „Hush · 50m · Xcode“ in deinem Standardkalender an."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adds a private event like \"Hush · 50m · Xcode\" to your default calendar when a session ends."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añade un evento privado como \"Hush · 50m · Xcode\" a tu calendario predeterminado al terminar una sesión."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoute un événement privé comme « Hush · 50m · Xcode » à ton calendrier par défaut à la fin d'une session."
+          }
+        }
+      }
+    },
+    "settings.calendar.label" : {
+      "comment" : "Calendar log row label",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kalender:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendar log:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendario:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calendrier :"
+          }
+        }
+      }
+    },
+    "settings.calendar.open" : {
+      "comment" : "Open Calendar privacy settings",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir"
+          }
+        }
+      }
+    },
+    "settings.calendar.requires14" : {
+      "comment" : "Calendar log macOS 14 requirement",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erfordert macOS 14 oder neuer."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requires macOS 14 or later."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requiere macOS 14 o posterior."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nécessite macOS 14 ou ultérieur."
+          }
+        }
+      }
+    },
     "settings.focus.diagnostic" : {
       "comment" : "Diagnostic label",
       "localizations" : {
@@ -1438,6 +1670,386 @@
         }
       }
     },
+    "settings.notifications.alert.dismiss" : {
+      "comment" : "Dismiss alert",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "settings.notifications.alert.noDialog.body" : {
+      "comment" : "Alert body when prompt did not appear",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS hat keinen Dialog gezeigt. Öffne die Benachrichtigungseinstellungen und schalte Hush ein, oder starte Hush aus /Applications neu."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS did not show a permission dialog. Open Notifications settings and enable Hush, or run the copy in /Applications."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS no mostró un diálogo de permiso. Abre Ajustes de notificaciones y activa Hush, o ejecuta la copia en /Applications."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS n'a pas affiché de dialogue. Ouvre les réglages Notifications et active Hush, ou lance la copie dans /Applications."
+          }
+        }
+      }
+    },
+    "settings.notifications.alert.noDialog.title" : {
+      "comment" : "Alert title when prompt did not appear",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kein Berechtigungsdialog"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No permission dialog"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin diálogo de permiso"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas de dialogue d'autorisation"
+          }
+        }
+      }
+    },
+    "settings.notifications.alert.unsigned.body" : {
+      "comment" : "Alert body when app unsigned",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieser Build ist nicht signiert. macOS zeigt dann keinen Benachrichtigungs-Dialog. Baue Hush in Xcode neu (Code Signing ist jetzt an) oder teste /Applications/Hush.app."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This build is unsigned. macOS won't show a notification permission dialog. Rebuild Hush in Xcode (code signing is enabled now) or test with /Applications/Hush.app."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta compilación no está firmada. macOS no mostrará el diálogo de notificaciones. Recompila Hush en Xcode (firma de código activada) o prueba /Applications/Hush.app."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette build n'est pas signée. macOS n'affichera pas le dialogue de notifications. Recompile Hush dans Xcode (signature activée) ou teste /Applications/Hush.app."
+          }
+        }
+      }
+    },
+    "settings.notifications.alert.unsigned.title" : {
+      "comment" : "Alert title when app unsigned",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Build nicht signiert"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unsigned build"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compilación sin firmar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Build non signée"
+          }
+        }
+      }
+    },
+    "settings.notifications.alertsOff" : {
+      "comment" : "Notifications allowed but banner style is None",
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benachrichtigungen sind erlaubt, aber Banner sind aus. Wähle „Banner“ oder „Hinweise“ für Hush."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications are allowed, but banners are off. Set Hush to Banners or Alerts."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las notificaciones están permitidas, pero los banners están desactivados. Pon Hush en Banners o Alertas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les notifications sont autorisées, mais les bannières sont désactivées. Règle Hush sur Bannières ou Alertes."
+          }
+        }
+      }
+    },
+    "settings.notifications.denied" : {
+      "comment" : "Notification permission denied",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benachrichtigungen sind abgelehnt. Öffne die Systemeinstellungen und schalte Hush ein (Banners oder Hinweise)."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications are off. Open System Settings and enable Hush (Banners or Alerts)."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las notificaciones están desactivadas. Abre Ajustes del Sistema y activa Hush (banners o alertas)."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les notifications sont refusées. Ouvre Réglages Système et active Hush (bannières ou alertes)."
+          }
+        }
+      }
+    },
+    "settings.notifications.label" : {
+      "comment" : "Notifications row label",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benachrichtigungen:"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notificaciones:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications :"
+          }
+        }
+      }
+    },
+    "settings.notifications.notDetermined" : {
+      "comment" : "Notification permission not yet requested",
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush erscheint erst in den Systemeinstellungen, nachdem du unten „Benachrichtigungen erlauben“ gewählt hast."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush won't show in System Settings until you tap Allow notifications below."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush no aparecerá en Ajustes del Sistema hasta que pulses Permitir notificaciones abajo."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hush n'apparaîtra dans Réglages Système qu'après avoir appuyé sur Autoriser les notifications ci-dessous."
+          }
+        }
+      }
+    },
+    "settings.notifications.ok" : {
+      "comment" : "Notifications enabled",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fokus-Ende sendet eine Benachrichtigung."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You'll get an alert when a focus session ends."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recibirás un aviso al terminar una sesión de enfoque."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu recevras une alerte à la fin d'une session de focus."
+          }
+        }
+      }
+    },
+    "settings.notifications.open" : {
+      "comment" : "Open notification settings",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffnen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir"
+          }
+        }
+      }
+    },
+    "settings.notifications.request" : {
+      "comment" : "Request notification permission",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benachrichtigungen erlauben"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow notifications"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permitir notificaciones"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autoriser les notifications"
+          }
+        }
+      }
+    },
+    "settings.notifications.unsigned" : {
+      "comment" : "Settings hint when app bundle is unsigned",
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dieser Build ist nicht signiert; macOS blockiert den Benachrichtigungs-Dialog. Neu bauen in Xcode oder /Applications/Hush.app nutzen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This build is unsigned, so macOS blocks the notification prompt. Rebuild in Xcode or use /Applications/Hush.app."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta compilación no está firmada; macOS bloquea el aviso de permiso. Recompila en Xcode o usa /Applications/Hush.app."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette build n'est pas signée ; macOS bloque la demande. Recompile dans Xcode ou utilise /Applications/Hush.app."
+          }
+        }
+      }
+    },
     "settings.quitbutton.label" : {
       "comment" : "Settings row label",
       "localizations" : {
@@ -1637,6 +2249,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vérifier automatiquement les apps nouvellement ouvertes"
+          }
+        }
+      }
+    },
+    "settings.toggle.calendar" : {
+      "comment" : "Log focus sessions to Calendar",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beendete Fokus-Sitzungen im Kalender protokollieren"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log finished focus sessions to Calendar"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registrar sesiones de enfoque terminadas en el calendario"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer les sessions de focus terminées dans le calendrier"
           }
         }
       }
