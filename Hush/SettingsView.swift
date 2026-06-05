@@ -308,11 +308,9 @@ struct SettingsView: View {
                                        isOn: $logFocusToCalendar)
                                     .onChange(of: logFocusToCalendar) { enabled in
                                         if enabled {
-                                            manager.requestCalendarAccess { granted in
-                                                if !granted {
-                                                    logFocusToCalendar = false
-                                                }
-                                            }
+                                            // keep the toggle on; if access is missing the
+                                            // denied banner explains how to grant it
+                                            manager.requestCalendarAccess()
                                         } else {
                                             manager.calendarAccessDenied = false
                                         }
@@ -355,6 +353,7 @@ struct SettingsView: View {
         .onAppear {
             manager.focusMirrorRearmAndRefresh()
             manager.refreshNotificationStatus()
+            manager.refreshCalendarStatus()
         }
     }
 }

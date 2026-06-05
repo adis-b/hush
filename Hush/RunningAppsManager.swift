@@ -132,6 +132,7 @@ class RunningAppsManager: ObservableObject {
             self.focusMirror?.ensureWatching(force: true)
             self.refreshFocusState()
             self.refreshNotificationStatus()
+            self.refreshCalendarStatus()
         }
 
         let workspaceCenter = NSWorkspace.shared.notificationCenter
@@ -359,10 +360,31 @@ class RunningAppsManager: ObservableObject {
             completion?(false)
             return
         }
-        logger.requestAccess { [weak self] granted in
-            self?.calendarAccessDenied = !granted
-            completion?(granted)
+
+        switch logger.access {
+        case .writeOnlyOrBetter:
+            calendarAccessDenied = false
+            completion?(true)
+        case .denied:
+            // can't prompt again once denied, point the user at System Settings
+            calendarAccessDenied = true
+            completion?(false)
+        case .notDetermined:
+            // EventKit shows the TCC sheet fine for accessory apps. Do NOT flip
+            // activation policy here, it orders the Settings window out on Sequoia.
+            logger.requestAccess { [weak self] granted in
+                self?.calendarAccessDenied = !granted
+                completion?(granted)
+            }
         }
+    }
+
+    func refreshCalendarStatus() {
+        guard #available(macOS 14, *) else { return }
+        ensureCalendarLogger()
+        guard let logger = calendarLogger as? CalendarLogger else { return }
+        // only flag denied while the user actually wants logging
+        calendarAccessDenied = logFocusToCalendar && logger.access == .denied
     }
 
     private func ensureCalendarLogger() {
