@@ -80,6 +80,10 @@ class RunningAppsManager: ObservableObject {
     @AppStorage("excludedFocusModes") var excludedFocusModesData: Data = Data()
 
     @Published var calendarAccessDenied: Bool = false
+    // last calendar outcome / live auth state. Only shown in Settings when there's
+    // something the user might need to act on, see calendarDiagnosticIsProblem.
+    @Published var calendarDiagnostic: String = ""
+    @Published var calendarDiagnosticIsProblem: Bool = false
     // nil = alerts OK; non-nil = localized settings key for the issue
     @Published var notificationIssueKey: String?
     // true while macOS will still show the allow/deny sheet (notDetermined)
@@ -370,11 +374,34 @@ class RunningAppsManager: ObservableObject {
             calendarAccessDenied = true
             completion?(false)
         case .notDetermined:
-            // EventKit shows the TCC sheet fine for accessory apps. Do NOT flip
-            // activation policy here, it orders the Settings window out on Sequoia.
-            logger.requestAccess { [weak self] granted in
-                self?.calendarAccessDenied = !granted
-                completion?(granted)
+            // Sonoma/Sequoia: the EventKit sheet shows fine for accessory apps, and
+            // flipping activation policy actively breaks it (sheet never appears).
+            // Tahoe (26+): the plain path shows nothing, the app must be frontmost
+            // while the prompt is up. So foreground only there, then revert and
+            // re-assert the Settings window.
+            if #available(macOS 26, *) {
+                let settingsWindow = SettingsWindowController.current?.window
+                let priorPolicy = NSApp.activationPolicy()
+                if priorPolicy == .accessory {
+                    NSApp.setActivationPolicy(.regular)
+                }
+                NSApp.activate(ignoringOtherApps: true)
+                logger.requestAccess { [weak self] granted, err in
+                    if priorPolicy == .accessory {
+                        NSApp.setActivationPolicy(.accessory)
+                    }
+                    settingsWindow?.makeKeyAndOrderFront(nil)
+                    NSApp.activate(ignoringOtherApps: true)
+                    self?.calendarAccessDenied = !granted
+                    self?.noteCalendarRequestResult(granted: granted, error: err)
+                    completion?(granted)
+                }
+            } else {
+                logger.requestAccess { [weak self] granted, err in
+                    self?.calendarAccessDenied = !granted
+                    self?.noteCalendarRequestResult(granted: granted, error: err)
+                    completion?(granted)
+                }
             }
         }
     }
@@ -385,6 +412,61 @@ class RunningAppsManager: ObservableObject {
         guard let logger = calendarLogger as? CalendarLogger else { return }
         // only flag denied while the user actually wants logging
         calendarAccessDenied = logFocusToCalendar && logger.access == .denied
+
+        let status = logger.statusDescription
+        switch logger.access {
+        case .writeOnlyOrBetter:
+            if let cal = logger.defaultCalendarTitle() {
+                setCalendarDiagnostic("access: \(status), default calendar: \(cal)", isProblem: false)
+            } else {
+                // granted, but EventKit hands us no calendar to write to
+                setCalendarDiagnostic("access: \(status), but no default calendar, events can't be written",
+                                      isProblem: true)
+            }
+        default:
+            // notDetermined / denied is already conveyed by the toggle + red banner
+            setCalendarDiagnostic("access: \(status)", isProblem: false)
+        }
+    }
+
+    private func setCalendarDiagnostic(_ text: String, isProblem: Bool) {
+        calendarDiagnostic = text
+        calendarDiagnosticIsProblem = isProblem
+    }
+
+    @available(macOS 14, *)
+    private func noteCalendarRequestResult(granted: Bool, error: String?) {
+        let status = (calendarLogger as? CalendarLogger)?.statusDescription ?? "?"
+        if granted {
+            // refreshCalendarStatus right after will replace this with the OK line
+            refreshCalendarStatus()
+        } else {
+            setCalendarDiagnostic("request: granted=false, status=\(status), err=\(error ?? "none")",
+                                  isProblem: true)
+        }
+    }
+
+    // user gesture from Settings: re-trigger the prompt if still askable, else open System Settings
+    func reapproveCalendar() {
+        guard #available(macOS 14, *) else { return }
+        ensureCalendarLogger()
+        guard let logger = calendarLogger as? CalendarLogger else { return }
+        if logger.access == .notDetermined {
+            // don't refresh here, it would clobber the request: granted/err diagnostic
+            requestCalendarAccess()
+        } else {
+            openCalendarSettings()
+            refreshCalendarStatus()
+        }
+    }
+
+    // same pattern for notifications: prompt while askable, else open System Settings
+    func reapproveNotifications() {
+        if notificationNeedsPrompt {
+            requestNotificationAccess()
+        } else {
+            openNotificationSettings()
+        }
     }
 
     private func ensureCalendarLogger() {
@@ -500,10 +582,17 @@ class RunningAppsManager: ObservableObject {
         let plannedSeconds = Double(lastFocusDuration * 60)
         let elapsed = sessionStart.map { now.timeIntervalSince($0) } ?? 0
 
-        if logFocusToCalendar, #available(macOS 14, *), let sessionStart,
-           now.timeIntervalSince(sessionStart) >= calendarMinLogSeconds {
-            ensureCalendarLogger()
-            (calendarLogger as? CalendarLogger)?.log(start: sessionStart, end: now, appName: anchorApp)
+        if logFocusToCalendar, #available(macOS 14, *), let sessionStart {
+            let elapsedNow = now.timeIntervalSince(sessionStart)
+            if elapsedNow >= calendarMinLogSeconds {
+                ensureCalendarLogger()
+                (calendarLogger as? CalendarLogger)?.log(start: sessionStart, end: now, appName: anchorApp) { [weak self] note in
+                    self?.setCalendarDiagnostic(note, isProblem: note.hasPrefix("skip") || note.contains("failed") || note.contains("no default"))
+                }
+            } else {
+                setCalendarDiagnostic("last session ~\(Int(elapsedNow / 60))m, under the 5m minimum, not logged",
+                                      isProblem: false)
+            }
         }
 
         focusSessionStartDate = nil

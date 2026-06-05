@@ -1206,6 +1206,35 @@
         }
       }
     },
+    "settings.permission.reapprove" : {
+      "comment" : "Re-trigger a permission prompt or open System Settings",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neu anfragen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Re-approve…"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver a aprobar…"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réautoriser…"
+          }
+        }
+      }
+    },
     "settings.calendar.requires14" : {
       "comment" : "Calendar log macOS 14 requirement",
       "localizations" : {

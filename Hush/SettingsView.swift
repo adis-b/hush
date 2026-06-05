@@ -88,28 +88,50 @@ struct SettingsView: View {
                 }
             }
         } else {
-            Text("settings.notifications.ok", comment: "Notifications enabled")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+            HStack(spacing: 6) {
+                Text("settings.notifications.ok", comment: "Notifications enabled")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Button(String(localized: "settings.permission.reapprove",
+                               comment: "Re-approve permission")) {
+                    manager.reapproveNotifications()
+                }
+                .controlSize(.small)
+            }
         }
     }
 
     @ViewBuilder
     private var calendarLogStatusLine: some View {
-        if manager.calendarAccessDenied {
-            HStack(spacing: 6) {
-                Text("settings.calendar.denied", comment: "Calendar write access denied")
-                    .font(.caption)
-                    .foregroundStyle(.red)
-                Button(String(localized: "settings.calendar.open", comment: "Open Calendar privacy settings")) {
-                    manager.openCalendarSettings()
+        if logFocusToCalendar {
+            VStack(alignment: .leading, spacing: 4) {
+                if manager.calendarAccessDenied {
+                    Text("settings.calendar.denied", comment: "Calendar write access denied")
+                        .font(.caption)
+                        .foregroundStyle(.red)
+                } else {
+                    Text("settings.calendar.desc", comment: "Calendar log description")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                 }
-                .controlSize(.small)
+                HStack(spacing: 6) {
+                    Button(String(localized: "settings.permission.reapprove",
+                                   comment: "Re-approve permission")) {
+                        manager.reapproveCalendar()
+                    }
+                    .controlSize(.small)
+                    Button(String(localized: "settings.calendar.open", comment: "Open Calendar privacy settings")) {
+                        manager.openCalendarSettings()
+                    }
+                    .controlSize(.small)
+                }
+                if manager.calendarDiagnosticIsProblem, !manager.calendarDiagnostic.isEmpty {
+                    Text("\(String(localized: "settings.focus.diagnostic", comment: "Diagnostic label")) \(manager.calendarDiagnostic)")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .textSelection(.enabled)
+                }
             }
-        } else if logFocusToCalendar {
-            Text("settings.calendar.desc", comment: "Calendar log description")
-                .font(.caption)
-                .foregroundStyle(.secondary)
         }
     }
 

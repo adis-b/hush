@@ -25,30 +25,55 @@ final class CalendarLogger {
         }
     }
 
-    // call when the user flips the toggle on. completion on main.
-    func requestAccess(_ completion: @escaping (Bool) -> Void) {
+    // raw status string for the Settings diagnostic line
+    var statusDescription: String {
+        switch EKEventStore.authorizationStatus(for: .event) {
+        case .notDetermined: return "notDetermined"
+        case .restricted: return "restricted"
+        case .denied: return "denied"
+        case .fullAccess: return "fullAccess"
+        case .writeOnly: return "writeOnly"
+        case .authorized: return "authorized"
+        @unknown default: return "unknown"
+        }
+    }
+
+    // readable under write-only access; nil means EventKit gave us nowhere to write
+    func defaultCalendarTitle() -> String? {
+        store.defaultCalendarForNewEvents?.title
+    }
+
+    // call when the user flips the toggle on. completion on main with granted + raw error text.
+    func requestAccess(_ completion: @escaping (Bool, String?) -> Void) {
         store.requestWriteOnlyAccessToEvents { granted, error in
             if let error {
                 os_log("CalendarLogger: access request failed %{public}@",
                        log: self.log, type: .error, error.localizedDescription)
             }
-            DispatchQueue.main.async { completion(granted) }
+            DispatchQueue.main.async { completion(granted, error?.localizedDescription) }
         }
     }
 
-    func log(start: Date, end: Date, appName: String?) {
+    func log(start: Date, end: Date, appName: String?, completion: ((String) -> Void)? = nil) {
+        func report(_ note: String, type: OSLogType = .info) {
+            os_log("CalendarLogger: %{public}@", log: log, type: type, note)
+            if let completion {
+                DispatchQueue.main.async { completion(note) }
+            }
+        }
+
         guard access == .writeOnlyOrBetter else {
-            os_log("CalendarLogger: skip log, not authorized", log: log, type: .info)
+            report("skip, not authorized (\(statusDescription))")
             return
         }
         guard end > start else {
-            os_log("CalendarLogger: skip log, end <= start", log: log, type: .info)
+            report("skip, end <= start")
             return
         }
 
         DispatchQueue.global(qos: .utility).async { [self] in
             guard let calendar = store.defaultCalendarForNewEvents else {
-                os_log("CalendarLogger: no default calendar", log: log, type: .error)
+                report("no default calendar for new events (write-only gave none)", type: .error)
                 return
             }
 
@@ -74,9 +99,9 @@ final class CalendarLogger {
 
             do {
                 try store.save(event, span: .thisEvent, commit: true)
+                report("saved \"\(title)\" to \(calendar.title)")
             } catch {
-                os_log("CalendarLogger: save failed %{public}@",
-                       log: log, type: .error, error.localizedDescription)
+                report("save failed: \(error.localizedDescription)", type: .error)
             }
         }
     }
